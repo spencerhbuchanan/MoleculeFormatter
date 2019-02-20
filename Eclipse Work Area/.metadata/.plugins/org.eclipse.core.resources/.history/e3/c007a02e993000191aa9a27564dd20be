@@ -1,0 +1,46 @@
+
+import java.util.ArrayList;
+
+public class Atom
+{
+	private ArrayList<String>	atomID			= new ArrayList<String>();
+	private ArrayList<String>	atomElement		= new ArrayList<String>();
+
+	private ArrayList<Double>	atomXCoordinate	= new ArrayList<Double>();
+	private ArrayList<Double>	atomYCoordinate	= new ArrayList<Double>();
+	private ArrayList<Double>	atomZCoordinate	= new ArrayList<Double>();
+
+/*
+	private ArrayList	bonds			= new ArrayList();
+*/
+	public void addAtom(String atomID) {
+		this.atomID.add(atomID);
+		this.atomElement.add("Nullium");
+		
+		this.atomXCoordinate.add(0.0);
+		this.atomYCoordinate.add(0.0);
+		this.atomZCoordinate.add(0.0);
+	}
+	
+	public void addAtom(String atomID.
+					String atomElement,
+					double atomXCoordinate,
+					double atomYCoordinate,
+					double atomZCoordinate	)
+	{
+		this.atomID.add(atomID);
+		this.atomElement.add("Nullium");
+		
+		this.atomXCoordinate.add(0.0);
+		this.atomYCoordinate.add(0.0);
+		this.atomZCoordinate.add(0.0);
+	}
+	
+	public void printAtoms()
+	{
+		for(int i = 0; i < this.atomID.size(); i++)
+		{
+			System.out.println(atomID.get(i));
+		}
+	}
+}

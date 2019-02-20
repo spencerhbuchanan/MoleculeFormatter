@@ -1,0 +1,78 @@
+/*
+ * Author: Spencer Buchanan
+ * File Created:    2/1/2019
+ * Last Edited:     2/1/2019
+ */
+
+/*
+ * Integration Project
+ * PSI 1
+ * 
+ * Goals:          *List built-in data types
+ *                 *Greet user
+ *                 *Define the term "variable"
+ *                  Define the term "scope"
+ *                  Describe a "final" variable
+ *                  Describe what type casting is
+ *                 *Format a string with escape sequences
+ *          
+ * Requirements:    Use a boolean
+ *                  Use an int
+ *                  Use a double
+ *                  Use a String
+ *                  Use a final
+ *                  Use typecasting
+ *                 *Use escape sequences
+ * 
+ */
+
+
+public class Main {
+
+  public static void main(String args[]) {
+    System.out.print("Welcome! The following program goes over\n"
+                   + "some basic Java datatypes and information\n\n");
+    
+    System.out.println("What is a variable?");
+    System.out.println("\tA variable is a space in memory that is reserved to store some information.");
+    System.out.println("\tVariables are used when a value needs to be used in multiple places, or when\n"
+                     + "\tits value needs to be changed easily.");
+    
+    System.out.print("\nSome basic Java data types are:\n"
+                    + "\tboolean\n"
+                      + "\t\t*Stores either 'true' or 'false'\n"
+                    + "\tinteger\n"
+                      + "\t\t*Stores a number between " + Integer.MAX_VALUE + " and " + Integer.MIN_VALUE
+                    + "\n"
+                    + "\tdouble\n"
+                      + "\t\t*Stores a floating point number\n"
+                    + "\tString\n"
+                      + "\t\t*Not necessarily a variable, but a class to make objects which store text\n");
+    
+    System.out.print('\n');
+    
+    System.out.println("Variables have a \"Scope\", meaning that a variable can only be \"seen\" in its\n"
+                     + "\"room\" and \"rooms\" inside of its own room");
+    System.out.println("For example, lets create a variable \"couch\" and put it in the Main \"room\"");
+    
+    int couch = 1234;
+    
+    System.out.println("\n\tThe value of couch is: " + couch + " and couch is an integer\n");
+    
+    System.out.println("Now lets go into an if statement, which will be in the Main \"room\", and create\n"
+                     + "a new variable, this time a boolean");
+    
+    if(true) {
+      boolean inBedRoom = true;
+      System.out.println("\n\tThe value of inBedRoom is: " + inBedRoom);
+      System.out.println("\tThe value of couch is: " + couch);
+    }
+    
+    System.out.println("\nWhen we were in the if room, we could use 'inBedRoom' since it was in the if\n"
+                     + " statements room. And we could also use couch because it was outside of the if\n"
+                     + "room (the if statement was in the Main room)");
+    
+    
+  }
+  
+}

@@ -1,0 +1,14 @@
+
+public class Main
+{
+
+	public static void main(String[] args) {
+		Atom atom = new Atom();
+		
+		atom.addAtom("a1");
+		atom.addAtom("b7");
+		
+		atom.printAtoms();
+	}
+
+}

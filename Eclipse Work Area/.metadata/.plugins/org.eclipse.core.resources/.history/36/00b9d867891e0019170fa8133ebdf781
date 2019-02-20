@@ -1,0 +1,25 @@
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+		System.out.println("Hello World Test");
+		
+		Clock digitalClock = new Clock();
+		
+		digitalClock.
+		
+		System.out.println(digitalClock.getSeconds());
+		System.out.println(digitalClock.getMinutes());
+		System.out.println(digitalClock.getHours());
+		
+		digitalClock.printTime();
+		
+		
+	}
+
+}

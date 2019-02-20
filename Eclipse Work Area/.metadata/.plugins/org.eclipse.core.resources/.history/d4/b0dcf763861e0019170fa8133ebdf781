@@ -1,0 +1,34 @@
+
+
+public class Clock {
+	private int timeInSeconds = 5165;
+//	private short secondHandAngle = 0;
+//	private short minuteHandAngle = 0;
+//	private short hourHandAngle = 0;
+	
+	public int getTotalSeconds()
+	{
+		return timeInSeconds;
+	}
+	
+	public int getSeconds()
+	{
+		return timeInSeconds % 60;
+	}
+	
+	public int getMinutes()
+	{
+		return (timeInSeconds / 60) % 60; 
+	}
+	
+	public int getHours()
+	{
+		return ((timeInSeconds / 60) / 60) % 60;
+	}
+	
+	public void printTime()
+	{
+		System.out.println("%01d:%01d:%01d", getHours(), getMinutes(), getSeconds());
+	}
+	
+}

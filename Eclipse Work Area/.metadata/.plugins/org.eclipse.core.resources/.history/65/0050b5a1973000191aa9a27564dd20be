@@ -1,0 +1,11 @@
+
+public class Main
+{
+	public Main()
+	{
+		Atom atom = new Atom();
+		
+		atom.addAtom("a2");
+		atom.printAtoms();
+	}
+}
