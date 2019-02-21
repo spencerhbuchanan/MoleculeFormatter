@@ -9,6 +9,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+
+import molecules.Molecule;
+
 import javax.xml.namespace.QName;
 
 public class Main
