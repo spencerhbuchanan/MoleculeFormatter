@@ -1,0 +1,77 @@
+package molecules;
+
+import java.util.ArrayList;
+
+public class Molecule
+{
+	private String				moleculeName;
+
+	//TODO: Convert to using Atom objects
+	//#############################################################################
+	private ArrayList<String>	atomID			= new ArrayList<String>();
+	private ArrayList<String>	atomElement		= new ArrayList<String>();
+
+	private ArrayList<Double>	atomXCoordinate	= new ArrayList<Double>();
+	private ArrayList<Double>	atomYCoordinate	= new ArrayList<Double>();
+	private ArrayList<Double>	atomZCoordinate	= new ArrayList<Double>();
+	
+	//#############################################################################
+	
+	private ArrayList<Atom> atoms = new ArrayList<Atom>();
+	
+	private ArrayList<String> boundAtoms = new ArrayList<String>();
+	private ArrayList<Short> bondOrder = new ArrayList<Short>();
+
+	public Molecule(String moleculeName)
+	{
+		this.moleculeName = moleculeName;
+	}
+
+	public Molecule()
+	{
+		this.moleculeName = "unnamedMolecule";
+	}
+
+	public void addAtom(String atomID)
+	{
+		this.atoms.add(new Atom());
+		this.atoms.get(atoms.size()).setAtomID(atomID);
+	}
+
+	public void addAtom(String atomID, String atomElement, double atomXCoordinate, double atomYCoordinate, double atomZCoordinate)
+	{
+		this.atomID.add(atomID);
+		this.atomElement.add(atomElement);
+
+		this.atomXCoordinate.add(atomXCoordinate);
+		this.atomYCoordinate.add(atomYCoordinate);
+		this.atomZCoordinate.add(atomZCoordinate);
+	}
+
+	public void addBond(String boundAtoms, short bondOrder)
+	{
+		this.boundAtoms.add(boundAtoms);
+		this.bondOrder.add(bondOrder);
+	}
+	
+	public String getElement(int atom)
+	{
+		return this.atomElement.get(atom);
+	}
+
+	public double getXCoordinate(int atom)
+	{
+		return this.atomXCoordinate.get(atom);
+	}
+
+	public double getYCoordinate(int atom)
+	{
+		return this.atomYCoordinate.get(atom);
+	}
+
+	public double getZCoordinate(int atom)
+	{
+		return this.atomZCoordinate.get(atom);
+	}
+
+}
