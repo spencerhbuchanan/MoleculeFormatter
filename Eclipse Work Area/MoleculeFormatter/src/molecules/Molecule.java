@@ -8,12 +8,14 @@ public class Molecule
 {
 	private String				moleculeName;
 	
-	private ArrayList<Atom> atoms = new ArrayList<Atom>();
+	protected ArrayList<Atom> atoms = new ArrayList<Atom>();
 	
-	Map<String, Integer> atomMap = new HashMap<String, Integer>();
+	protected Map<String, Integer> atomMap = new HashMap<String, Integer>();
 	
-	private ArrayList<String> boundAtoms = new ArrayList<String>();
-	private ArrayList<Short> bondOrder = new ArrayList<Short>();
+	protected ArrayList<String> boundAtoms = new ArrayList<String>();
+	protected ArrayList<Short> bondOrder = new ArrayList<Short>();
+	
+	public MoleculeView moleculeView = new MoleculeView();
 
 	public Molecule(String moleculeName)
 	{
@@ -29,6 +31,8 @@ public class Molecule
 	{
 		this.atoms.add(new Atom());
 		this.atoms.get(atoms.size()).setAtomID(atomID);
+		
+		this.refreshAtomicMap();
 	}
 
 	public void addAtom(String atomID, String atomElement, double atomXCoordinate, double atomYCoordinate, double atomZCoordinate)
@@ -42,16 +46,54 @@ public class Molecule
 		this.atoms.get(newestItemIndex).setAtomX(atomXCoordinate);
 		this.atoms.get(newestItemIndex).setAtomY(atomYCoordinate);
 		this.atoms.get(newestItemIndex).setAtomZ(atomZCoordinate);
+		
+		this.refreshAtomicMap();
+	}
+	
+	public void addBond(String boundAtoms, short bondOrder)
+	{
+		this.boundAtoms.add(boundAtoms);
+		this.bondOrder.add(bondOrder);
 	}
 	
 	public void refreshAtomicMap()
 	{
-		for(int i = 0; i < atoms.size(); i++)
+		for(int atomArrayIndex = 0; atomArrayIndex < atoms.size(); atomArrayIndex++)
 		{
-			String atomID = atoms.get(i).getAtomID();
+			String atomID = atoms.get(atomArrayIndex).getAtomID();
+			
+			if(atomMap.containsKey(atomID))									//If mapping is present
+			{
+				if(atomMap.get(atomID) == atomArrayIndex)							//If correctly mapped
+				{
+					System.out.println(	"atomID mapped and correct index" +
+									"\tatomID:" + atomID +
+									"\tindex:" + atomArrayIndex);
+					continue;
+				} else {														//If mapped but incorrectly, re-map
+					atomMap.remove(atomID);
+					atomMap.put(atomID, atomArrayIndex);
+					System.out.println(	"atomID remapped" +
+									"\tatomID:" + atomID +
+									"\tindex:" + atomArrayIndex);
+				}
+				
+			} else {														//If mapping not present, map
+				System.out.println(	"atomID not mapped. Adding." +
+								"\tatomID:" + atomID +
+								"\tindex:" + atomArrayIndex);
+				atomMap.putIfAbsent(atomID, atomArrayIndex);							//Avoid overwriting JIC
+			}
 		}
 	}
 	
-	
+	public void printAtoms()
+	{
+		this.moleculeView.printAtoms(atoms);
+	}
 
+	public void importFile(String filePath)
+	{
+		MoleculeImporter.importCmlFile(this, filePath);
+	}
 }

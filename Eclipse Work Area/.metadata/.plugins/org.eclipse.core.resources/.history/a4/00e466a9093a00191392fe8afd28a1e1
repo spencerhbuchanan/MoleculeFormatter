@@ -1,0 +1,14 @@
+package molecules;
+
+import java.util.ArrayList;
+
+public class MoleculeView
+{
+	public void printAtoms(ArrayList<Atom> atoms)
+	{
+		System.out.println("Printing atoms...");
+		
+		
+		atoms.forEach((atom) -> System.out.printf("%-4s\t%2s\n\t%10f\n\t%10f\n\t%10f\n", atom.getAtomID(), atom.getAtomElement(), atom.getAtomX(), atom.getAtomY(), atom.getAtomZ()));
+	}
+}
