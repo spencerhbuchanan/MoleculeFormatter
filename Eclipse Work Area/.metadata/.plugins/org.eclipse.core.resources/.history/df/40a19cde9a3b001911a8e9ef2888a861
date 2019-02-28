@@ -55,9 +55,6 @@ public class Molecule
 		
 		int newestItemIndex = this.atoms.size() - 1;
 		
-		/*
-		 * Fills the newly created atom object with the data passed to this method
-		 */
 		this.atoms.get(newestItemIndex).setAtomID(atomID);
 		this.atoms.get(newestItemIndex).setAtomElement(atomElement);
 		this.atoms.get(newestItemIndex).setAtomX(atomXCoordinate);
@@ -73,10 +70,6 @@ public class Molecule
 		this.bondOrder.add(bondOrder);
 	}
 	
-	/*
-	 * Refreshes a map which is used to 
-	 * access atoms via their ID's
-	 */
 	private void refreshAtomicMap()
 	{
 		for(int atomArrayIndex = 0; atomArrayIndex < atoms.size(); atomArrayIndex++)

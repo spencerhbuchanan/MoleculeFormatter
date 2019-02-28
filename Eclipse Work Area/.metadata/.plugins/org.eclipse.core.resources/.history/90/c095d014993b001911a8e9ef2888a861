@@ -1,7 +1,10 @@
+package molecules;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.NoSuchElementException;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -10,20 +13,14 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import molecules.Molecule;
-
-import javax.xml.namespace.QName;
-
-public class Main
+public class MoleculeImporter
 {
-
-	public static void main(String[] args) {
-		Molecule molecule = new Molecule("MoleculeTest");
-		
+	public static void importCmlFile(Molecule molecule, String filePath)
+	{
 		try
 		{
 			XMLInputFactory factory = XMLInputFactory.newInstance();
-			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader("C:\\Users\\Spencer Buchanan\\OneDrive - Florida Gulf Coast University\\CompChem\\Cation.cml"));
+			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader("C:\\Users\\shbuchanan3669\\Documents\\GitHub\\MoleculeFormatter\\Cation.cml"));
 			
 			while(eventReader.hasNext())
 			{
@@ -82,7 +79,7 @@ public class Main
 							System.out.println("\tBound Atoms:\t" + attribute.getValue());
 							boundAtoms = attribute.getValue();
 							attribute = startElement.getAttributeByName(new QName("order"));
-							System.out.println("\tElement Type:\t" + attribute.getValue());
+							System.out.println("\tBond Order:\t" + attribute.getValue());
 							bondOrder = Short.parseShort(attribute.getValue());
 							
 							molecule.addBond(boundAtoms, bondOrder);
@@ -95,8 +92,6 @@ public class Main
 				}
 				
 			}
-			
-			molecule.printMolecule();
 			
 		} catch(FileNotFoundException e)
 		{
@@ -111,7 +106,5 @@ public class Main
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-
 }

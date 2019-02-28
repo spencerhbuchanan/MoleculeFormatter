@@ -1,12 +1,14 @@
 package molecules;
 
+import java.util.ArrayList;
+
 public class MoleculeView
 {
-	public static void printMolecule(Molecule molecule)
+	public static void printAtoms(Molecule molecule)
 	{
 		System.out.println("Atoms in the molecule " + molecule.moleculeName);
 		
-		molecule.atoms.forEach((atom) -> printAtom(atom));
+		molecule.forEach((atom) -> printAtom(atom));
 	}
 	
 	private static void printAtom(Atom atom)

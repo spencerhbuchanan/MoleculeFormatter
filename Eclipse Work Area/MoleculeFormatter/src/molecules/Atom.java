@@ -1,3 +1,15 @@
+/*
+ * Author:	Spencer Buchanan
+ * 
+ * Desc:		Class to contain and describe an atom
+ * 
+ * Stores:	atomID
+ * 			atomElement
+ * 			atomX
+ * 			atomY
+ * 			atomZ
+ */
+
 package molecules;
 
 import javafx.beans.property.StringProperty;
@@ -32,6 +44,10 @@ public class Atom
 	{
 		return this.atomID.get();
 	}
+	
+	/*
+	 * Atom Element get/set/properties
+	 */
 	
 	public String getAtomElement()
 	{

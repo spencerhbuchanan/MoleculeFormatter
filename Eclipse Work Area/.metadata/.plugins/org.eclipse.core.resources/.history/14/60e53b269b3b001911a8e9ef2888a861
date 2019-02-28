@@ -1,6 +1,4 @@
 import molecules.Molecule;
-
-import java.io.Console;
 import java.util.Scanner;
 
 public class Main
@@ -15,14 +13,10 @@ public class Main
 		{
 			menuSelection = 0;
 			
-			
-			
-			System.out.printf(	"Menu Options:\n"
-					+ 		"\t1. Go To PSI Specific Items\n"
-					+ 		"\t2. Import Molecule\n"
-					+ 		"\t3. Print Molecule\n");
-			
-			System.out.flush();
+			System.out.printf(	"Menu Option:\n"
+					+ 		"\t1. Go To PSI Specific Items"
+					+ 		"\t2. Import Molecule"
+					+ 		"\t3. Print Molecule");
 			
 			menuSelection = inputScanner.nextShort();
 			

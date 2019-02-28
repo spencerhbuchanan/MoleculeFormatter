@@ -15,6 +15,10 @@ import javax.xml.stream.events.XMLEvent;
 
 public class MoleculeImporter
 {
+	/*
+	 * importCmlFile is intended to read a .cml file (path denoted by filePath)
+	 * into a molecule class (passed through molecule reference)
+	 */
 	public static void importCmlFile(Molecule molecule, String filePath)
 	{
 		try

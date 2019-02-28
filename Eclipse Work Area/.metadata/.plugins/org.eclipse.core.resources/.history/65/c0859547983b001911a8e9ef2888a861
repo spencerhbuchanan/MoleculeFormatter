@@ -2,7 +2,7 @@ package molecules;
 
 public class MoleculeView
 {
-	public static void printMolecule(Molecule molecule)
+	public static void printAtoms(Molecule molecule)
 	{
 		System.out.println("Atoms in the molecule " + molecule.moleculeName);
 		
