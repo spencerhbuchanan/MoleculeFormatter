@@ -19,7 +19,7 @@ public class Main {
       menuSelection = 0;
 
       System.out.printf("Menu Options:\n" + "\t1. Go To PSI Specific Items\n"
-          + "\t2. Import Molecule\n" + "\t3. Print Molecule\n" + "\t-1. Exit program\n");
+          + "\t2. Import Molecule\n" + "\t3. Print Molecule\n" + "\t-1. Exit program");
 
       System.out.flush();
 

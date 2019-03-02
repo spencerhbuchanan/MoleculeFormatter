@@ -58,14 +58,16 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\Spencer Buchanan\OneDrive - Florida Gulf Coast University\COP 2006\EclipseWorkspace" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="Main - BuchananIntegration" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\Spencer Buchanan\Desktop\BuchananIntegration.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="Main (1) - MoleculeFormatter" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\Spencer Buchanan\Desktop\BI.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
-		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<item value="2" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Spencer Buchanan\Desktop\BI.jar"/>
 			<item value="C:\Users\Spencer Buchanan\Desktop\BuchananIntegration.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="C:\Users\Spencer Buchanan\OneDrive - Florida Gulf Coast University\COP 2006\EclipseWorkspace.xml"/>
 			<item value=".xml"/>
 		</list>
 	</section>
