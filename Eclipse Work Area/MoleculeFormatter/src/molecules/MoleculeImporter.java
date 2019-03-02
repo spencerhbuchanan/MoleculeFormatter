@@ -24,7 +24,7 @@ public class MoleculeImporter
 		try
 		{
 			XMLInputFactory factory = XMLInputFactory.newInstance();
-			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader("C:\\Users\\shbuchanan3669\\Documents\\GitHub\\MoleculeFormatter\\Cation.cml"));
+			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader(filePath));
 			
 			while(eventReader.hasNext())
 			{

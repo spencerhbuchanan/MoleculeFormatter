@@ -1,0 +1,15 @@
+/*
+ * Author: Spencer Buchanan
+ * 
+ * Desc: PSI2 Specific requirements
+ */
+
+import java.lang.Math;
+import java.util.Random;
+
+public class PSI2
+{
+	public static void runPSI2() {
+		
+	}
+}

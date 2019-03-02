@@ -1,0 +1,74 @@
+/*
+ * Author: Spencer Buchanan
+ */
+
+import molecules.Molecule;
+
+import java.util.Scanner;
+
+public class Main
+{
+
+	public static void main(String[] args) throws InterruptedException {
+		short menuSelection = 0;
+		
+		Scanner inputScanner = new Scanner(System.in);
+		
+		do 
+		{
+			menuSelection = 0;
+			
+			for(int i = 0; i < 128; i++) System.out.print('\n');	//Clears screen with new lines (BAD. DO BETTER.)
+			
+			System.out.printf(	"Menu Options:\n"
+					+ 		"\t1. Go To PSI Specific Items\n"
+					+ 		"\t2. Import Molecule\n"
+					+ 		"\t3. Print Molecule\n");
+			
+			System.out.flush();
+			
+			try {
+				String menuString = inputScanner.nextLine();		//Inputs whole line into temp variable
+				menuSelection = Short.parseShort(menuString);		//Tries to parse as short
+			} catch(NumberFormatException e) {					//If not a number, show an error
+				System.err.println("Error. Input NAN");
+				Thread.sleep(1000);
+				continue;
+			}
+			
+			switch(menuSelection)
+			{
+				case -1:									//Asking to exit program, let skip the switch
+					break;
+				case 1:
+					PSI2.runPSI2();
+					Thread.sleep(1000);
+					break;
+				
+				case 2:
+					System.out.println("Gucci");
+					Thread.sleep(1000);
+					break;
+				
+				case 3:
+					System.out.println("Dolphin Broke");
+					Thread.sleep(1000);
+					break;
+				
+				default:
+					System.out.println("Not an option... Reloading in a second...");
+					Thread.sleep(1000);
+			}
+			
+			
+		} while (menuSelection != -1);
+		
+		inputScanner.close();
+		
+		/*
+		Molecule molecule = new Molecule("MoleculeTest");
+		molecule.importFile("Included");
+		molecule.printMolecule();
+		*/
+	}
+}
