@@ -1,0 +1,49 @@
+import molecules.Molecule;
+import java.util.Scanner;
+
+public class Main
+{
+
+	public static void main(String[] args) {
+		short menuSelection = 0;
+		
+		Scanner inputScanner = new Scanner(System.in);
+		
+		do 
+		{
+			menuSelection = 0;
+			
+			System.out.printf(	"Menu Option:\n"
+					+ 		"\t1. Go To PSI Specific Items"
+					+ 		"\t2. Import Molecule"
+					+ 		"\t3. Print Molecule");
+			
+			menuSelection = inputScanner.nextShort();
+			
+			switch(menuSelection)
+			{
+				case 1:
+					break;
+				
+				case 2:
+					break;
+				
+				case 3:
+					break;
+				
+				default:
+					System.out.println("Not an option.");
+			}
+			
+			
+		} while (menuSelection > 0);
+		
+		inputScanner.close();
+		
+		/*
+		Molecule molecule = new Molecule("MoleculeTest");
+		molecule.importFile("Included");
+		molecule.printMolecule();
+		*/
+	}
+}

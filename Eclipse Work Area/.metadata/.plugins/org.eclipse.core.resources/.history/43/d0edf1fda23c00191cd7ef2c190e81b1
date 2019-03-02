@@ -1,0 +1,43 @@
+/*
+ * Author: Spencer Buchanan
+ * 
+ * Desc: PSI2 Specific requirements
+ */
+
+import java.lang.Math;
+import java.util.Random;
+import java.util.Scanner;
+
+public class PSI2
+{
+	public static void runPSI2() {
+		System.out.println("Enter two numbers, separated by a new line.");
+		
+		Scanner psiScanner = new Scanner(System.in);
+
+		short numberOne, numberTwo = 0;
+		
+		try {
+			String inputOne = psiScanner.nextLine();
+			String inputTwo = psiScanner.nextLine();
+			
+			numberOne = Short.parseShort(inputOne);
+			numberTwo = Short.parseShort(inputTwo);
+			
+		}catch(NumberFormatException e){
+			System.err.println("Error. Input NAN");
+			
+			psiScanner.close();
+			
+			return;
+		}
+		
+		System.out.println("You entered the numbers " + numberOne + " and " + numberTwo);
+		
+		Random rng = new Random();
+		
+		System.out.println("Printing a random number between zero and the absolute value of numberOne: " + rng.nextInt(Math.abs(numberOne)));
+		
+		psiScanner.close();
+	}
+}

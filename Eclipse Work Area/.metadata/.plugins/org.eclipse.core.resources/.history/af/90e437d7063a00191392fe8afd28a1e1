@@ -1,0 +1,11 @@
+package molecules;
+
+public class MoleculeView extends Molecule
+{
+	public void printAtoms()
+	{
+		System.out.println("Printing atoms...");
+		
+		System.out.printf("%4s\t%2s\t%10f", atoms.get(0).getAtomID());
+	}
+}

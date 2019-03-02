@@ -1,0 +1,80 @@
+package molecules;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Molecule
+{
+	private String				moleculeName;
+	
+	private ArrayList<Atom> atoms = new ArrayList<Atom>();
+	
+	Map<String, Integer> atomMap = new HashMap<String, Integer>();
+	
+	private ArrayList<String> boundAtoms = new ArrayList<String>();
+	private ArrayList<Short> bondOrder = new ArrayList<Short>();
+
+	public Molecule(String moleculeName)
+	{
+		this.moleculeName = moleculeName;
+	}
+
+	public Molecule()
+	{
+		this.moleculeName = "unnamedMolecule";
+	}
+
+	public void addAtom(String atomID)
+	{
+		this.atoms.add(new Atom());
+		this.atoms.get(atoms.size()).setAtomID(atomID);
+	}
+
+	public void addAtom(String atomID, String atomElement, double atomXCoordinate, double atomYCoordinate, double atomZCoordinate)
+	{
+		this.atoms.add(new Atom());
+		
+		int newestItemIndex = this.atoms.size() - 1;
+		
+		this.atoms.get(newestItemIndex).setAtomID(atomID);
+		this.atoms.get(newestItemIndex).setAtomElement(atomElement);
+		this.atoms.get(newestItemIndex).setAtomX(atomXCoordinate);
+		this.atoms.get(newestItemIndex).setAtomY(atomYCoordinate);
+		this.atoms.get(newestItemIndex).setAtomZ(atomZCoordinate);
+	}
+	
+	public void refreshAtomicMap()
+	{
+		for(int i = 0; i < atoms.size(); i++)
+		{
+			String atomID = atoms.get(i).getAtomID();
+			
+			if(atomMap.containsKey(atomID))									//If mapping is present
+			{
+				if(atomMap.get(atomID) == i)										//If correctly mapped
+				{
+					System.out.println(	"atomID mapped and correct index" +
+									"\tatomID:" + atomID +
+									"\tindex:" + i);
+					continue;
+				} else {														//If mapped but incorrectly, re-map
+					atomMap.remove(atomID);
+					atomMap.put(atomID, i);
+					System.out.println(	"atomID remapped" +
+									"\tatomID:" + atomID +
+									"\tindex:" + i);
+				}
+				
+			} else {														//If mapping not present, map
+				System.out.println(	"atomID not mapped. Adding." +
+								"\tatomID:" + atomID +
+								"\tindex:" + i);
+				atomMap.putIfAbsent(atomID, i);									//Avoid overwriting JIC
+			}
+		}
+	}
+	
+	
+
+}
