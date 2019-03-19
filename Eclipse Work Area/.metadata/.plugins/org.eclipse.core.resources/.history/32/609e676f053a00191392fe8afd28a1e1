@@ -1,6 +1,0 @@
-package molecules;
-
-public class MoleculeView extends Molecule
-{
-	
-}

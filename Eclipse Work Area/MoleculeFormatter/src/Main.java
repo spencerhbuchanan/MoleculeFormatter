@@ -1,3 +1,4 @@
+
 /*
  * Author: Spencer Buchanan
  */
@@ -5,66 +6,71 @@
 import molecules.Molecule;
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
 
-  public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException
+	{
 
-    short menuSelection = 0;
+		short menuSelection = 0;
 
-    Scanner inputScanner = new Scanner(System.in);
+		Scanner inputScanner = new Scanner(System.in);
 
-    Molecule molecule = new Molecule("REBECCA");
+		Molecule molecule = new Molecule("REBECCA");
 
-    do {
-      menuSelection = 0;
+		do
+		{
+			menuSelection = 0;
 
-      System.out.printf("Menu Options:\n" + "\t1. Go To PSI Specific Items\n"
-          + "\t2. Import Molecule\n" + "\t3. Print Molecule\n" + "\t-1. Exit program\n");
+			System.out.printf("Menu Options:\n" + "\t1. Go To PSI Specific Items\n" + "\t2. Import Molecule\n" + "\t3. Print Molecule\n" + "\t-1. Exit program\n");
 
-      System.out.flush();
+			System.out.flush();
 
-      try {
+			try
+			{
 
-        String menuString = inputScanner.nextLine(); // Inputs whole line into temp variable
-        menuSelection = Short.parseShort(menuString); // Tries to parse as short
+				String menuString = inputScanner.nextLine(); // Inputs whole line into temp variable
+				menuSelection = Short.parseShort(menuString); // Tries to parse as short
 
-      } catch (NumberFormatException e) { // If not a number, show an error
-        System.err.println("Error. Input NAN");
-        Thread.sleep(1000);
-        continue;
-      }
+			} catch(NumberFormatException e)
+			{ // If not a number, show an error
+				System.err.println("Error. Input NAN");
+				Thread.sleep(1000);
+				continue;
+			}
 
-      switch (menuSelection) {
-        case -1: // Asking to exit program, let skip the switch
-          System.out.println("Ending...");
-          break;
+			switch(menuSelection)
+			{
+				case -1: // Asking to exit program, let skip the switch
+					System.out.println("Ending...");
+					break;
 
-        case 1:
-          PSI2.runPSI2(inputScanner);
-          System.out.println("PSI2 DONE");
-          break;
+				case 1:
+					PSI2.runPSI2(inputScanner);
+					System.out.println("PSI2 DONE");
+					break;
 
-        case 2:
-          molecule.importFile(inputScanner.nextLine());
-          System.out.println("File imported.");
-          break;
+				case 2:
+					molecule.importFile(inputScanner.nextLine());
+					System.out.println("File imported.");
+					break;
 
-        case 3:
-          molecule.printMolecule();
-          break;
+				case 3:
+					molecule.printMolecule();
+					break;
 
-        default:
-          System.out.println("Not an option... Reloading in a second...");
-          Thread.sleep(1000);
-      }
+				default:
+					System.out.println("Not an option... Reloading in a second...");
+					Thread.sleep(1000);
+			}
 
-    } while (menuSelection != -1);
+		} while(menuSelection != -1);
 
-    inputScanner.close();
+		inputScanner.close();
 
-    /*
-     * Molecule molecule = new Molecule("MoleculeTest"); molecule.importFile("Included");
-     * molecule.printMolecule();
-     */
-  }
+		/*
+		 * Molecule molecule = new Molecule("MoleculeTest");
+		 * molecule.importFile("Included"); molecule.printMolecule();
+		 */
+	}
 }
