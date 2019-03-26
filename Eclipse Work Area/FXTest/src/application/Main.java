@@ -18,24 +18,24 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		TableView<AtomEntry> table = new TableView<AtomEntry>();
+		TableView<Atom> table = new TableView<Atom>();
 		
 		
 		//Creates a new column, with type (object, valuetype), and gives the column a title
-		TableColumn<AtomEntry, String> atomIDCol
-			= new TableColumn<AtomEntry, String>("Atom ID");
-		TableColumn<AtomEntry, String> atomElementCol
-			= new TableColumn<AtomEntry, String>("Element");
+		TableColumn<Atom, String> atomIDCol
+			= new TableColumn<Atom, String>("Atom ID");
+		TableColumn<Atom, String> atomElementCol
+			= new TableColumn<Atom, String>("Element");
 		
-		TableColumn<AtomEntry, Double> xyzCol					//Parent column for XYZ
-			= new TableColumn<AtomEntry, Double>("Coordinates");
+		TableColumn<Atom, Double> xyzCol					//Parent column for XYZ
+			= new TableColumn<Atom, Double>("Coordinates");
 		
-		TableColumn<AtomEntry, Double> atomXCol
-			= new TableColumn<AtomEntry, Double>("X");
-		TableColumn<AtomEntry, Double> atomYCol
-			= new TableColumn<AtomEntry, Double>("Y");
-		TableColumn<AtomEntry, Double> atomZCol
-			= new TableColumn<AtomEntry, Double>("Z");
+		TableColumn<Atom, Double> atomXCol
+			= new TableColumn<Atom, Double>("X");
+		TableColumn<Atom, Double> atomYCol
+			= new TableColumn<Atom, Double>("Y");
+		TableColumn<Atom, Double> atomZCol
+			= new TableColumn<Atom, Double>("Z");
 		
 		//Groups children atomX,Y,ZCol under parent xyzCol
 		//warnings, find why suppression needed
@@ -51,7 +51,7 @@ public class Main extends Application {
 		
 		atomIDCol.setSortType(TableColumn.SortType.DESCENDING);
 		
-		ObservableList<AtomEntry> list = getAtomList();
+		ObservableList<Atom> list = getAtomList();
 		table.setItems(list);
 		
 		//Adds columns to table
@@ -70,13 +70,13 @@ public class Main extends Application {
 		
 	}
 	
-	private ObservableList<AtomEntry> getAtomList()
+	private ObservableList<Atom> getAtomList()
 	{
-		AtomEntry atomOne = new AtomEntry("a1", "H", 1.1, 2.2, 3.3);
-		AtomEntry atomTwo = new AtomEntry("a2", "C", 1.2, 2.3, 3.4);
-		AtomEntry atomThree = new AtomEntry("a3", "O", 1.3, 2.4, 3.5);
+		Atom atomOne = new Atom("a1", "H", 1.1, 2.2, 3.3);
+		Atom atomTwo = new Atom("a2", "C", 1.2, 2.3, 3.4);
+		Atom atomThree = new Atom("a3", "O", 1.3, 2.4, 3.5);
 		
-		ObservableList<AtomEntry> list = FXCollections.observableArrayList(atomOne, atomTwo, atomThree);
+		ObservableList<Atom> list = FXCollections.observableArrayList(atomOne, atomTwo, atomThree);
 		
 		return list;
 	}
