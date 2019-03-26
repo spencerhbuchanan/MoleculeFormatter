@@ -34,4 +34,7 @@
 <fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+<fullyQualifiedTypeName name="javafx.scene.control.cell.TextFieldTableCell"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellEditEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TablePosition"/>
 </qualifiedTypeNameHistroy>

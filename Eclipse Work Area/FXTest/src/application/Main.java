@@ -7,8 +7,11 @@ import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
 
 
@@ -20,8 +23,9 @@ public class Main extends Application {
 		
 		TableView<Atom> table = new TableView<Atom>();
 		
+		table.setEditable(true);
 		
-		//Creates a new column, with type (object, valuetype), and gives the column a title
+	//Creates a new column, with type (object, valuetype), and gives the column a title
 		TableColumn<Atom, String> atomIDCol
 			= new TableColumn<Atom, String>("Atom ID");
 		TableColumn<Atom, String> atomElementCol
@@ -37,11 +41,56 @@ public class Main extends Application {
 		TableColumn<Atom, Double> atomZCol
 			= new TableColumn<Atom, Double>("Z");
 		
-		//Groups children atomX,Y,ZCol under parent xyzCol
-		//warnings, find why suppression needed
+		atomIDCol.setMinWidth(40);
+		atomElementCol.setMinWidth(40);
+		
+	//Text Fields (AtomID and Element)
+		
+		//Atom ID
+		atomIDCol.setCellValueFactory(new PropertyValueFactory<>("atomID"));
+		atomIDCol.setCellFactory(TextFieldTableCell.<Atom> forTableColumn());
+		
+		//On Edit Commit (for Atom ID Column)
+		atomIDCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
+			TablePosition<Atom, String> pos = event.getTablePosition();
+			
+			String newAtomID = event.getNewValue();
+			
+			int row = pos.getRow();
+			Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomID(newAtomID);
+		});
+		
+		//Atom Element
+		atomElementCol.setCellValueFactory(new PropertyValueFactory<>("atomElement"));
+		atomElementCol.setCellFactory(TextFieldTableCell.<Atom> forTableColumn());
+		
+		//On Edit Commit (for Element Column)
+		atomElementCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
+			TablePosition<Atom, String> pos = event.getTablePosition();
+			
+			String newAtomElement = event.getNewValue();
+			
+			int row = pos.getRow();
+			Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomElement(newAtomElement);
+			
+		});
+		
+	//Number Fields (atom x y z)
+		
+		//Atom X
+		//////////WORKING HERE/////////////
+		
+		
+		
+	//Groups children atomX,Y,ZCol under parent xyzCol
+	//warnings, find why suppression needed
 		xyzCol.getColumns().addAll(atomXCol, atomYCol, atomZCol);
 		
-		//How to fill cells (which variables to use)
+	//How to fill cells (which variables to use)
 		atomIDCol.setCellValueFactory(new PropertyValueFactory<>("atomID"));
 		atomElementCol.setCellValueFactory(new PropertyValueFactory<>("atomElement"));
 		
@@ -54,8 +103,8 @@ public class Main extends Application {
 		ObservableList<Atom> list = getAtomList();
 		table.setItems(list);
 		
-		//Adds columns to table
-		//warnings, find why suppression needed
+	//Adds columns to table
+	//warnings, find why suppression needed
 		table.getColumns().addAll(atomIDCol, atomElementCol, xyzCol);
 		
 		StackPane root = new StackPane();
