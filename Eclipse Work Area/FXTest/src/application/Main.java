@@ -1,10 +1,14 @@
 package application;
 	
+import molecules.Molecule;
+
 import javafx.application.Application;
-import javafx.collections.FXCollections;
+//import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
+//import javafx.util.StringConverter;
+//import javafx.util.converter.DoubleStringConverter;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -15,31 +19,36 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
 
 
-public class Main extends Application {
+public class Main extends Application
+{
+	
 	//FIXME: Find why you need the below line for the below bits of code (annotated with a warnings comment)
 	@SuppressWarnings("unchecked")
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage)
+	{
+		Molecule molecule = new Molecule("Janet");
+		molecule.importFile("C:\\Users\\shbuchanan3669\\Documents\\GitHub\\MoleculeFormatter\\Cation.cml");
 		
-		TableView<Atom> table = new TableView<Atom>();
+		TableView<molecules.Atom> table = new TableView<molecules.Atom>();
 		
 		table.setEditable(true);
 		
 	//Creates a new column, with type (object, valuetype), and gives the column a title
-		TableColumn<Atom, String> atomIDCol
-			= new TableColumn<Atom, String>("Atom ID");
-		TableColumn<Atom, String> atomElementCol
-			= new TableColumn<Atom, String>("Element");
+		TableColumn<molecules.Atom, String> atomIDCol
+			= new TableColumn<molecules.Atom, String>("Atom ID");
+		TableColumn<molecules.Atom, String> atomElementCol
+			= new TableColumn<molecules.Atom, String>("Element");
 		
-		TableColumn<Atom, Double> xyzCol					//Parent column for XYZ
-			= new TableColumn<Atom, Double>("Coordinates");
+		TableColumn<molecules.Atom, Double> xyzCol					//Parent column for XYZ
+			= new TableColumn<molecules.Atom, Double>("Coordinates");
 		
-		TableColumn<Atom, Double> atomXCol
-			= new TableColumn<Atom, Double>("X");
-		TableColumn<Atom, Double> atomYCol
-			= new TableColumn<Atom, Double>("Y");
-		TableColumn<Atom, Double> atomZCol
-			= new TableColumn<Atom, Double>("Z");
+		TableColumn<molecules.Atom, Double> atomXCol
+			= new TableColumn<molecules.Atom, Double>("X");
+		TableColumn<molecules.Atom, Double> atomYCol
+			= new TableColumn<molecules.Atom, Double>("Y");
+		TableColumn<molecules.Atom, Double> atomZCol
+			= new TableColumn<molecules.Atom, Double>("Z");
 		
 		atomIDCol.setMinWidth(40);
 		atomElementCol.setMinWidth(40);
@@ -47,43 +56,44 @@ public class Main extends Application {
 	//Text Fields (AtomID and Element)
 		
 		//Atom ID
-		atomIDCol.setCellValueFactory(new PropertyValueFactory<>("atomID"));
-		atomIDCol.setCellFactory(TextFieldTableCell.<Atom> forTableColumn());
+		atomIDCol.setCellValueFactory(cellData -> cellData.getValue().atomIDProperty());
+		atomIDCol.setCellFactory(TextFieldTableCell.<molecules.Atom> forTableColumn());
 		
 		//On Edit Commit (for Atom ID Column)
-		atomIDCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
-			TablePosition<Atom, String> pos = event.getTablePosition();
+		atomIDCol.setOnEditCommit((CellEditEvent<molecules.Atom, String> event) -> {
+			TablePosition<molecules.Atom, String> pos = event.getTablePosition();
 			
 			String newAtomID = event.getNewValue();
 			
 			int row = pos.getRow();
-			Atom atom = event.getTableView().getItems().get(row);
+			molecules.Atom atom = event.getTableView().getItems().get(row);
 			
 			atom.setAtomID(newAtomID);
 		});
 		
 		//Atom Element
-		atomElementCol.setCellValueFactory(new PropertyValueFactory<>("atomElement"));
-		atomElementCol.setCellFactory(TextFieldTableCell.<Atom> forTableColumn());
+		atomElementCol.setCellValueFactory(cellData -> cellData.getValue().atomElementProperty());
+		atomElementCol.setCellFactory(TextFieldTableCell.<molecules.Atom> forTableColumn());
 		
 		//On Edit Commit (for Element Column)
-		atomElementCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
-			TablePosition<Atom, String> pos = event.getTablePosition();
+		atomElementCol.setOnEditCommit((CellEditEvent<molecules.Atom, String> event) -> {
+			TablePosition<molecules.Atom, String> pos = event.getTablePosition();
 			
 			String newAtomElement = event.getNewValue();
 			
 			int row = pos.getRow();
-			Atom atom = event.getTableView().getItems().get(row);
+			molecules.Atom atom = event.getTableView().getItems().get(row);
 			
 			atom.setAtomElement(newAtomElement);
 			
+			//molecule.printMolecule(); LOOK AT ME!
 		});
 		
 	//Number Fields (atom x y z)
 		
 		//Atom X
-		//////////WORKING HERE/////////////
-		
+		//atomXCol.setCellValueFactory(new PropertyValueFactory<>("atomX"));
+		//atomXCol.setCellFactory(TextFieldTableCell.<Atom, Double>forTableColumn(new DoubleStringConverter()));
 		
 		
 	//Groups children atomX,Y,ZCol under parent xyzCol
@@ -91,16 +101,15 @@ public class Main extends Application {
 		xyzCol.getColumns().addAll(atomXCol, atomYCol, atomZCol);
 		
 	//How to fill cells (which variables to use)
-		atomIDCol.setCellValueFactory(new PropertyValueFactory<>("atomID"));
-		atomElementCol.setCellValueFactory(new PropertyValueFactory<>("atomElement"));
 		
+		//REMOVING THESE
 		atomXCol.setCellValueFactory(new PropertyValueFactory<>("atomX"));
 		atomYCol.setCellValueFactory(new PropertyValueFactory<>("atomY"));
 		atomZCol.setCellValueFactory(new PropertyValueFactory<>("atomZ"));
 		
 		atomIDCol.setSortType(TableColumn.SortType.DESCENDING);
 		
-		ObservableList<Atom> list = getAtomList();
+		ObservableList<molecules.Atom> list = molecule.getAtomList();
 		table.setItems(list);
 		
 	//Adds columns to table
@@ -118,19 +127,9 @@ public class Main extends Application {
 		primaryStage.show();
 		
 	}
-	
-	private ObservableList<Atom> getAtomList()
-	{
-		Atom atomOne = new Atom("a1", "H", 1.1, 2.2, 3.3);
-		Atom atomTwo = new Atom("a2", "C", 1.2, 2.3, 3.4);
-		Atom atomThree = new Atom("a3", "O", 1.3, 2.4, 3.5);
-		
-		ObservableList<Atom> list = FXCollections.observableArrayList(atomOne, atomTwo, atomThree);
-		
-		return list;
-	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{	
 		launch(args);
 	}
 }

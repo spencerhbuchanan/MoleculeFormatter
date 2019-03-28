@@ -33,8 +33,10 @@
 <fullyQualifiedTypeName name="javafx.geometry.Insets"/>
 <fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
-<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
 <fullyQualifiedTypeName name="javafx.scene.control.cell.TextFieldTableCell"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellEditEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TablePosition"/>
+<fullyQualifiedTypeName name="javafx.util.converter.DoubleStringConverter"/>
+<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+<fullyQualifiedTypeName name="molecules.Atom"/>
 </qualifiedTypeNameHistroy>

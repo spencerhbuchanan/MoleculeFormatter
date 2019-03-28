@@ -30,14 +30,9 @@ public class Atom
 	 * Atom ID/Element get/set/properties
 	 */
 	
-	public Atom(String atomID, String atomElement, double atomX, double atomY, double atomZ)
+	public Atom(String string, String string2, double d, double e, double f)
 	{
-		this.atomID.set(atomID);
-		this.atomElement.set(atomElement);
 		
-		this.atomX.set(atomX);
-		this.atomY.set(atomY);
-		this.atomZ.set(atomZ);
 	}
 
 	public void setAtomID(String atomID)

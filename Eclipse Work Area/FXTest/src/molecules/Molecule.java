@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Molecule
 {
 	protected String				moleculeName;
@@ -133,4 +136,14 @@ public class Molecule
 	{
 		MoleculeImporter.importCmlFile(this, filePath);
 	}
+
+	public ObservableList<Atom> getAtomList(){
+		
+		ObservableList<Atom> observableAtoms = FXCollections.observableArrayList(this.atoms);
+		
+		//GIMME LISTENERS!
+		
+		return observableAtoms;
+	}
+
 }
