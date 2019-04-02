@@ -5,17 +5,23 @@ import molecules.Molecule;
 import javafx.application.Application;
 //import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 //import javafx.util.StringConverter;
 //import javafx.util.converter.DoubleStringConverter;
 import javafx.scene.Scene;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 
@@ -34,6 +40,15 @@ public class Main extends Application
 		
 		table.setEditable(true);
 		
+		
+		//FIX THIS
+		Callback<TableColumn, TableCell> doubleValueCellFactory =
+				new Callback<TableColumn, TableCell>(){
+					public TableCell call(TableColumn p){
+						return new EditingDoubleCell();
+					}
+		};
+		
 	//Creates a new column, with type (object, valuetype), and gives the column a title
 		TableColumn<molecules.Atom, String> atomIDCol
 			= new TableColumn<molecules.Atom, String>("Atom ID");
@@ -43,12 +58,12 @@ public class Main extends Application
 		TableColumn<molecules.Atom, Double> xyzCol					//Parent column for XYZ
 			= new TableColumn<molecules.Atom, Double>("Coordinates");
 		
-		TableColumn<molecules.Atom, Double> atomXCol
-			= new TableColumn<molecules.Atom, Double>("X");
-		TableColumn<molecules.Atom, Double> atomYCol
-			= new TableColumn<molecules.Atom, Double>("Y");
-		TableColumn<molecules.Atom, Double> atomZCol
-			= new TableColumn<molecules.Atom, Double>("Z");
+		TableColumn<molecules.Atom, Number> atomXCol
+			= new TableColumn<molecules.Atom, Number>("X");
+		TableColumn<molecules.Atom, Number> atomYCol
+			= new TableColumn<molecules.Atom, Number>("Y");
+		TableColumn<molecules.Atom, Number> atomZCol
+			= new TableColumn<molecules.Atom, Number>("Z");
 		
 		atomIDCol.setMinWidth(40);
 		atomElementCol.setMinWidth(40);
@@ -91,22 +106,21 @@ public class Main extends Application
 		
 	//Number Fields (atom x y z)
 		
-		//Atom X
-		//atomXCol.setCellValueFactory(new PropertyValueFactory<>("atomX"));
-		//atomXCol.setCellFactory(TextFieldTableCell.<Atom, Double>forTableColumn(new DoubleStringConverter()));
+		//Coordinates Display
+		atomXCol.setCellValueFactory(cellData -> cellData.getValue().atomXProperty());
+		atomYCol.setCellValueFactory(cellData -> cellData.getValue().atomYProperty());
+		atomZCol.setCellValueFactory(cellData -> cellData.getValue().atomZProperty());
+		
+		atomXCol.setCellFactory(doubleCellFactory);
+		
+		//On Edit Commits
 		
 		
 	//Groups children atomX,Y,ZCol under parent xyzCol
 	//warnings, find why suppression needed
 		xyzCol.getColumns().addAll(atomXCol, atomYCol, atomZCol);
 		
-	//How to fill cells (which variables to use)
-		
-		//REMOVING THESE
-		atomXCol.setCellValueFactory(new PropertyValueFactory<>("atomX"));
-		atomYCol.setCellValueFactory(new PropertyValueFactory<>("atomY"));
-		atomZCol.setCellValueFactory(new PropertyValueFactory<>("atomZ"));
-		
+	//Filling the list
 		atomIDCol.setSortType(TableColumn.SortType.DESCENDING);
 		
 		ObservableList<molecules.Atom> list = molecule.getAtomList();
@@ -128,6 +142,87 @@ public class Main extends Application
 		
 	}
 
+	
+	//WHAT
+	class EditingDoubleCell extends TableCell<molecules.Atom, Number>
+	{
+		private TextField textField;
+		
+		public EditingDoubleCell() {}
+		
+		@Override
+		public void startEdit()
+		{
+			super.startEdit();
+			
+			if(textField == null)
+			{
+				createTextField();
+			}
+			
+			setGraphic(textField);
+			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			textField.selectAll();
+		}
+		
+		@Override
+		public void cancelEdit()
+		{
+			super.cancelEdit();
+			
+			setText(String.valueOf(getItem()));
+			setContentDisplay(ContentDisplay.TEXT_ONLY);
+		}
+
+		 @Override
+	      public void updateItem(Number number, boolean empty) {
+	          super.updateItem(number, empty);
+	         
+	          if (empty) {
+	              setText(null);
+	              setGraphic(null);
+	          } else {
+	              if (isEditing()) {
+	                  if (textField != null) {
+	                      textField.setText(getString());
+	                  }
+	                  setGraphic(textField);
+	                  setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+	              } else {
+	                  setText(getString());
+	                  setContentDisplay(ContentDisplay.TEXT_ONLY);
+	              }
+	          }
+	      }
+		
+		private void createTextField()
+		{
+			textField = new TextField(getString());
+			textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+
+			textField.setOnKeyPressed(new EventHandler<KeyEvent>()
+			{
+
+				@Override
+				public void handle(KeyEvent t)
+				{
+					if(t.getCode() == KeyCode.ENTER)
+					{
+						commitEdit(Double.parseDouble(textField.getText()));
+					} else if(t.getCode() == KeyCode.ESCAPE)
+					{
+						cancelEdit();
+					}
+				}
+			});
+		}
+		
+		private String getString()
+		{
+			return getItem() == null ? "" : getItem().toString();
+		}
+	}
+	
 	public static void main(String[] args)
 	{	
 		launch(args);

@@ -38,5 +38,12 @@
 <fullyQualifiedTypeName name="javafx.scene.control.TablePosition"/>
 <fullyQualifiedTypeName name="javafx.util.converter.DoubleStringConverter"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
+<fullyQualifiedTypeName name="java.lang.Number"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ContentDisplay"/>
 <fullyQualifiedTypeName name="molecules.Atom"/>
+<fullyQualifiedTypeName name="javafx.event.EventHandler"/>
+<fullyQualifiedTypeName name="javafx.scene.input.KeyEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.input.KeyCode"/>
+<fullyQualifiedTypeName name="javafx.util.Callback"/>
 </qualifiedTypeNameHistroy>
