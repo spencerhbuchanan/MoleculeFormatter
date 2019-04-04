@@ -1,5 +1,6 @@
 package application;
 	
+import molecules.Atom;
 import molecules.Molecule;
 
 import javafx.application.Application;
@@ -39,15 +40,6 @@ public class Main extends Application
 		TableView<molecules.Atom> table = new TableView<molecules.Atom>();
 		
 		table.setEditable(true);
-		
-		
-		//FIX THIS
-		Callback<TableColumn, TableCell> doubleValueCellFactory =
-				new Callback<TableColumn, TableCell>(){
-					public TableCell call(TableColumn p){
-						return new EditingDoubleCell();
-					}
-		};
 		
 	//Creates a new column, with type (object, valuetype), and gives the column a title
 		TableColumn<molecules.Atom, String> atomIDCol
@@ -106,13 +98,30 @@ public class Main extends Application
 		
 	//Number Fields (atom x y z)
 		
+		
+		/*
+		 * This creates a callback for the table item from the class CoordinateCellFactory, which decides how the cell is rendered.
+		 * The callback is typed to the TableColumn and TableCell, and those are typed to molecules.Atom and Number
+		 * 
+		 * TODO: Maybe find a better way to format these lines, they ugly
+		 */
+		Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>> coordinateColumnFactory = new Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>>()
+		{
+			@Override
+			public TableCell<molecules.Atom, Number> call(TableColumn<molecules.Atom, Number> eggplant)
+			{
+				return new CoordinateCellFactory();
+			}
+		}; 
+		
 		//Coordinates Display
 		atomXCol.setCellValueFactory(cellData -> cellData.getValue().atomXProperty());
 		atomYCol.setCellValueFactory(cellData -> cellData.getValue().atomYProperty());
 		atomZCol.setCellValueFactory(cellData -> cellData.getValue().atomZProperty());
 		
-		atomXCol.setCellFactory(doubleCellFactory);
-		
+		atomXCol.setCellFactory(coordinateColumnFactory);
+		atomYCol.setCellFactory(coordinateColumnFactory);
+		atomZCol.setCellFactory(coordinateColumnFactory);
 		//On Edit Commits
 		
 		
@@ -140,87 +149,6 @@ public class Main extends Application
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-	}
-
-	
-	//WHAT
-	class EditingDoubleCell extends TableCell<molecules.Atom, Number>
-	{
-		private TextField textField;
-		
-		public EditingDoubleCell() {}
-		
-		@Override
-		public void startEdit()
-		{
-			super.startEdit();
-			
-			if(textField == null)
-			{
-				createTextField();
-			}
-			
-			setGraphic(textField);
-			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			textField.selectAll();
-		}
-		
-		@Override
-		public void cancelEdit()
-		{
-			super.cancelEdit();
-			
-			setText(String.valueOf(getItem()));
-			setContentDisplay(ContentDisplay.TEXT_ONLY);
-		}
-
-		 @Override
-	      public void updateItem(Number number, boolean empty) {
-	          super.updateItem(number, empty);
-	         
-	          if (empty) {
-	              setText(null);
-	              setGraphic(null);
-	          } else {
-	              if (isEditing()) {
-	                  if (textField != null) {
-	                      textField.setText(getString());
-	                  }
-	                  setGraphic(textField);
-	                  setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-	              } else {
-	                  setText(getString());
-	                  setContentDisplay(ContentDisplay.TEXT_ONLY);
-	              }
-	          }
-	      }
-		
-		private void createTextField()
-		{
-			textField = new TextField(getString());
-			textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-
-			textField.setOnKeyPressed(new EventHandler<KeyEvent>()
-			{
-
-				@Override
-				public void handle(KeyEvent t)
-				{
-					if(t.getCode() == KeyCode.ENTER)
-					{
-						commitEdit(Double.parseDouble(textField.getText()));
-					} else if(t.getCode() == KeyCode.ESCAPE)
-					{
-						cancelEdit();
-					}
-				}
-			});
-		}
-		
-		private String getString()
-		{
-			return getItem() == null ? "" : getItem().toString();
-		}
 	}
 	
 	public static void main(String[] args)
