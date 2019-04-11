@@ -1,28 +1,19 @@
 package application;
-	
-import molecules.Atom;
+
 import molecules.Molecule;
 
 import javafx.application.Application;
-//import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-//import javafx.util.StringConverter;
-//import javafx.util.converter.DoubleStringConverter;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 
@@ -103,7 +94,7 @@ public class Main extends Application
 		 * This creates a callback for the table item from the class CoordinateCellFactory, which decides how the cell is rendered.
 		 * The callback is typed to the TableColumn and TableCell, and those are typed to molecules.Atom and Number
 		 * 
-		 * TODO: Maybe find a better way to format these lines, they ugly
+		 * TODO: Maybe find a better way to format these lines, they ugly and long
 		 */
 		Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>> coordinateColumnFactory = new Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>>()
 		{
@@ -122,7 +113,48 @@ public class Main extends Application
 		atomXCol.setCellFactory(coordinateColumnFactory);
 		atomYCol.setCellFactory(coordinateColumnFactory);
 		atomZCol.setCellFactory(coordinateColumnFactory);
+		
 		//On Edit Commits
+		atomXCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
+			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+			
+			double newAtomX = event.getNewValue().doubleValue();
+			
+			int row = pos.getRow();
+			molecules.Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomX(newAtomX);
+		});
+		atomXCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
+			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+			
+			double newAtomX = event.getNewValue().doubleValue();
+			
+			int row = pos.getRow();
+			molecules.Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomX(newAtomX);
+		});
+		atomYCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
+			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+			
+			double newAtomY = event.getNewValue().doubleValue();
+			
+			int row = pos.getRow();
+			molecules.Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomY(newAtomY);
+		});
+		atomZCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
+			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+			
+			double newAtomZ = event.getNewValue().doubleValue();
+			
+			int row = pos.getRow();
+			molecules.Atom atom = event.getTableView().getItems().get(row);
+			
+			atom.setAtomZ(newAtomZ);
+		});
 		
 		
 	//Groups children atomX,Y,ZCol under parent xyzCol

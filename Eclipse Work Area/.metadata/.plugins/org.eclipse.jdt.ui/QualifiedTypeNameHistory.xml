@@ -43,7 +43,6 @@
 <fullyQualifiedTypeName name="javafx.util.Callback"/>
 <fullyQualifiedTypeName name="javafx.scene.control.ListCell"/>
 <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
-<fullyQualifiedTypeName name="molecules.Atom"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Spinner"/>
 <fullyQualifiedTypeName name="javafx.util.StringConverter"/>
@@ -56,4 +55,5 @@
 <fullyQualifiedTypeName name="javafx.scene.input.KeyCode"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
+<fullyQualifiedTypeName name="molecules.Atom"/>
 </qualifiedTypeNameHistroy>

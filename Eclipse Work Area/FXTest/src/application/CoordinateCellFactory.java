@@ -47,24 +47,43 @@ public class CoordinateCellFactory extends TableCell<molecules.Atom, Number>
 		
 		coordinateSpinner.getValueFactory().setValue(initialValue);
 		
+		setText(null);
 		setGraphic(coordinateSpinner);
 	}
 
 	@Override
 	public void cancelEdit()
-	{
+	{	
 		super.cancelEdit();
-		//FIXME: Retains edited value in spinner
+		
+		/*
+		 * Needs to be done like this otherwise it doesn't work.
+		 * Mysteriously, lets it reset to previous value....
+		 */
+		coordinateSpinner.getValueFactory().setValue(123.456);
+		
+		setText(super.getItem().toString());
+		setGraphic(null);
+	}
+	
+	@Override
+	public void commitEdit(Number newValue)
+	{
+		super.commitEdit(newValue);
+		
+		setText(super.getItem().toString());
 		setGraphic(null);
 	}
 	
 	private void createCoordinateSpinner()
 	{
-		DoubleSpinnerValueFactory doubleSpinnerFactory = new DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE);
+		DoubleSpinnerValueFactory doubleSpinnerFactory = new DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE);		
+		
+		doubleSpinnerFactory.amountToStepByProperty().set(0.01);
 		
 		doubleSpinnerFactory.setConverter(new StringConverter<Double>(){
 			private final DecimalFormat df = new DecimalFormat("###.######");
-
+			
 			@Override
 			public String toString(Double value)
 			{
@@ -108,6 +127,8 @@ public class CoordinateCellFactory extends TableCell<molecules.Atom, Number>
 		
 		coordinateSpinner.setEditable(true);
 		
+		coordinateSpinner.getStyleClass().add(Spinner.STYLE_CLASS_ARROWS_ON_LEFT_VERTICAL);
+		
 		coordinateSpinner.setOnKeyReleased(new EventHandler<KeyEvent>(){
 			@Override
 			public void handle(KeyEvent t)
@@ -121,6 +142,8 @@ public class CoordinateCellFactory extends TableCell<molecules.Atom, Number>
 			}
 		});
 		
+		
+		//Calls after escape is pressed, effectively calling cancelEdit twice
 		coordinateSpinner.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
