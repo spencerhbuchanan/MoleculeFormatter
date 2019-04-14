@@ -1,13 +1,9 @@
 /*
- * Author:	Spencer Buchanan
+ * Author: Spencer Buchanan
  * 
- * Desc:		Class to contain and describe an atom
+ * Desc: Class to contain and describe an atom
  * 
- * Stores:	atomID
- * 			atomElement
- * 			atomX
- * 			atomY
- * 			atomZ
+ * Stores: atomID atomElement atomX atomY atomZ
  */
 
 package molecules;
@@ -29,85 +25,85 @@ public class Atom
 	/*
 	 * Atom ID/Element get/set/properties
 	 */
-	
+
 	public void setAtomID(String atomID)
 	{
 		this.atomID.set(atomID);
 	}
-	
+
 	public void setAtomElement(String atomElement)
 	{
 		this.atomElement.set(atomElement);
 	}
-	
+
 	public String getAtomID()
 	{
 		return this.atomID.get();
 	}
-	
+
 	/*
 	 * Atom Element get/set/properties
 	 */
-	
+
 	public String getAtomElement()
 	{
 		return this.atomElement.get();
 	}
-	
+
 	public StringProperty atomIDProperty()
 	{
 		return this.atomID;
 	}
-	
+
 	public StringProperty atomElementProperty()
 	{
 		return this.atomElement;
 	}
-	
+
 	/*
 	 * XYZ Coordinate get/set/properties
 	 */
-	
+
 	public void setAtomX(double atomX)
 	{
 		this.atomX.set(atomX);
 	}
-	
+
 	public void setAtomY(double atomY)
 	{
 		this.atomY.set(atomY);
 	}
-	
+
 	public void setAtomZ(double atomZ)
 	{
 		this.atomZ.set(atomZ);
 	}
-	
+
 	public double getAtomX()
 	{
 		return this.atomX.get();
 	}
-	
+
 	public double getAtomY()
 	{
 		return this.atomY.get();
 	}
-	
+
 	public double getAtomZ()
 	{
 		return this.atomZ.get();
 	}
-	
+
 	public DoubleProperty atomXProperty()
 	{
 		return this.atomX;
 	}
-	
+
 	public DoubleProperty atomYProperty()
 	{
 		return this.atomY;
 	}
-	
+
 	public DoubleProperty atomZProperty()
 	{
 		return this.atomZ;

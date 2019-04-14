@@ -1,1 +1,1 @@
-java -jar BI.jar
+java -jar PSI3.jar

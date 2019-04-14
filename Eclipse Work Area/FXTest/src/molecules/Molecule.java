@@ -42,8 +42,8 @@ public class Molecule
 	 * 
 	 * Used when: Only atomID is given
 	 * 
-	 * First a new atom object is created, then the ID passed to the method
-	 * is put into the newest atom object (at the end of the atoms ArrayList)
+	 * First a new atom object is created, then the ID passed to the method is put
+	 * into the newest atom object (at the end of the atoms ArrayList)
 	 */
 	public void addAtom(String atomID)
 	{
@@ -53,15 +53,14 @@ public class Molecule
 		this.refreshAtomicMap();
 	}
 
-	
 	/*
 	 * Extended Constructor
 	 * 
 	 * Used when: Atom ID, element, and coordinates are given
 	 * 
-	 * First a new atom object is created, and the index of the newest element
-	 * is stored (at the end, so index = sizeOf(atoms)). Then, the information
-	 * passed to the constructor is transfered to the Atom object.
+	 * First a new atom object is created, and the index of the newest element is
+	 * stored (at the end, so index = sizeOf(atoms)). Then, the information passed
+	 * to the constructor is transfered to the Atom object.
 	 */
 	public void addAtom(String atomID, String atomElement, double atomXCoordinate, double atomYCoordinate, double atomZCoordinate)
 	{
@@ -81,7 +80,11 @@ public class Molecule
 		this.refreshAtomicMap();
 	}
 
-	
+	public void removeAllAtoms()
+	{
+		this.atoms.clear();
+	}
+
 	/*
 	 * TODO: Add bond storage into the Atom class.
 	 */
@@ -89,6 +92,12 @@ public class Molecule
 	{
 		this.boundAtoms.add(boundAtoms);
 		this.bondOrder.add(bondOrder);
+	}
+
+	public void removeAllBonds()
+	{
+		this.boundAtoms.clear();
+		this.bondOrder.clear();
 	}
 
 	/*
@@ -137,12 +146,13 @@ public class Molecule
 		MoleculeImporter.importCmlFile(this, filePath);
 	}
 
-	public ObservableList<Atom> getAtomList(){
-		
+	public ObservableList<Atom> getAtomList()
+	{
+
 		ObservableList<Atom> observableAtoms = FXCollections.observableArrayList(this.atoms);
-		
-		//GIMME LISTENERS!
-		
+
+		// GIMME LISTENERS!
+
 		return observableAtoms;
 	}
 

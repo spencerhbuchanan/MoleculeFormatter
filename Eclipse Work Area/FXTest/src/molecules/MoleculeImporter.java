@@ -26,7 +26,8 @@ public class MoleculeImporter
 	 * importCmlFile is intended to read a .cml file (path denoted by filePath) into
 	 * a molecule class (passed through molecule reference)
 	 * 
-	 * Currently only known to be able to import BASIC cml files (like ones output from Avogadro)
+	 * Currently only known to be able to import BASIC cml files (like ones output
+	 * from Avogadro)
 	 */
 	public static void importCmlFile(Molecule molecule, String filePath)
 	{
@@ -41,7 +42,7 @@ public class MoleculeImporter
 
 				if(event.getEventType() == XMLStreamConstants.START_DOCUMENT)
 					System.out.println("Start Document");
-				
+
 				if(event.getEventType() == XMLStreamConstants.START_ELEMENT)
 				{
 					StartElement startElement = event.asStartElement();
