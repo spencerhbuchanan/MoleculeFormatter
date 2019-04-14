@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthSpinnerUI"/>
-<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-<fullyQualifiedTypeName name="java.util.TimerTask"/>
 <fullyQualifiedTypeName name="javafx.beans.property.BooleanProperty"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="ch.makery.address.util.DateUtil"/>
@@ -15,8 +12,6 @@
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="java.io.FileReader"/>
 <fullyQualifiedTypeName name="java.util.NoSuchElementException"/>
-<fullyQualifiedTypeName name="javafx.beans.property.StringProperty"/>
-<fullyQualifiedTypeName name="javafx.beans.property.DoubleProperty"/>
 <fullyQualifiedTypeName name="javafx.beans.property.SimpleStringProperty"/>
 <fullyQualifiedTypeName name="javafx.beans.property.SimpleDoubleProperty"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -25,4 +20,44 @@
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.io.Console"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="application.Atom"/>
+<fullyQualifiedTypeName name="javafx.beans.property.StringProperty"/>
+<fullyQualifiedTypeName name="javafx.beans.property.DoubleProperty"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.StackPane"/>
+<fullyQualifiedTypeName name="javafx.stage.Stage"/>
+<fullyQualifiedTypeName name="javafx.geometry.Insets"/>
+<fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
+<fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
+<fullyQualifiedTypeName name="javafx.scene.control.cell.TextFieldTableCell"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellEditEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TablePosition"/>
+<fullyQualifiedTypeName name="javafx.util.converter.DoubleStringConverter"/>
+<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+<fullyQualifiedTypeName name="java.lang.Number"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ContentDisplay"/>
+<fullyQualifiedTypeName name="javafx.util.Callback"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ListCell"/>
+<fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Spinner"/>
+<fullyQualifiedTypeName name="javafx.util.StringConverter"/>
+<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+<fullyQualifiedTypeName name="java.text.ParseException"/>
+<fullyQualifiedTypeName name="javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
+<fullyQualifiedTypeName name="javafx.scene.input.KeyEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.input.KeyCode"/>
+<fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
+<fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
+<fullyQualifiedTypeName name="molecules.Atom"/>
+<fullyQualifiedTypeName name="molecules.MoleculeView"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
+<fullyQualifiedTypeName name="javafx.scene.control.MenuBar"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Menu"/>
+<fullyQualifiedTypeName name="javafx.scene.control.MenuItem"/>
+<fullyQualifiedTypeName name="javafx.event.EventHandler"/>
+<fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
+<fullyQualifiedTypeName name="javafx.stage.FileChooser"/>
 </qualifiedTypeNameHistroy>
