@@ -1,5 +1,7 @@
 # MoleculeFormatter
 
 # To Run...
-Download the .java file, the .bat and the .cml file and run the .bat file.
-When inputting the .cml file into the program, after entering the # 2 and pressing enter, type the full path to the .cml file, replacing spaces with underscores.
+Download the .jar file, the .bat and the .cml files, and then run the .bat file.
+
+You can import a .cml file, using file>import. 
+It is suggested to use the .cml files provided here, as they are 90% guaranteed to work.
