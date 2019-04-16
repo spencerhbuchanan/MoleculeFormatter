@@ -28,6 +28,8 @@ public class MoleculeImporter
 	 * 
 	 * Currently only known to be able to import BASIC cml files (like ones output
 	 * from Avogadro)
+	 * 
+	 * TODO: Decide whether or not to remove debug prints
 	 */
 	public static void importCmlFile(Molecule molecule, String filePath)
 	{

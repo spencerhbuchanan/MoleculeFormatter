@@ -71,8 +71,6 @@ public class MoleculeView
 			molecules.Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomID(newAtomID);
-
-			molecule.printMolecule();
 		});
 
 		// Atom Element

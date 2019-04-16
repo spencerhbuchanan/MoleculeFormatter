@@ -1,7 +1,6 @@
 package application;
 
-import molecules.Molecule;
-import molecules.MoleculeView;
+import molecules.Molecules;
 import javafx.application.Application;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -16,8 +15,9 @@ public class Main extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
-		Molecule molecule = new Molecule("Janet");
-		molecule.importFile("C:\\Users\\Spencer Buchanan\\OneDrive - Florida Gulf Coast University\\CompChem\\Anion.cml");
+		Molecules molecules = new Molecules();
+		
+		molecules.createMolecule("Susan");
 
 		BorderPane borderPane = new BorderPane();
 
@@ -28,21 +28,18 @@ public class Main extends Application
 		importItem.setOnAction((event) -> {
 			final FileChooser fileChooser = new FileChooser();
 
-			molecule.removeAllAtoms();
-			molecule.removeAllBonds();
-
-			molecule.importFile(fileChooser.showOpenDialog(primaryStage).getAbsolutePath());
+			molecules.importMolecule("Susan", fileChooser.showOpenDialog(primaryStage).getAbsolutePath());
 
 			// TODO: Find out if the old atomTable is retained in memory (this is intended
 			// to refresh the table)
-			borderPane.setCenter(MoleculeView.addAtomTable(molecule));
+			borderPane.setCenter(molecules.getMoleculeTable("Susan"));
 		});
 
 		fileMenu.getItems().add(importItem);
 		menuBar.getMenus().add(fileMenu);
 
 		borderPane.setTop(menuBar);
-		borderPane.setCenter(MoleculeView.addAtomTable(molecule));
+		borderPane.setCenter(molecules.getMoleculeTable("Susan"));
 
 		primaryStage.setTitle("Atom Table");
 

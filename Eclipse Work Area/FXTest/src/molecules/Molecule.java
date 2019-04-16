@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Molecule
 {
-	protected String				moleculeName;
+	protected StringProperty			moleculeName;
 
 	protected ArrayList<Atom>		atoms		= new ArrayList<Atom>();
 
@@ -29,12 +30,12 @@ public class Molecule
 
 	public Molecule(String moleculeName)
 	{
-		this.moleculeName = moleculeName;
+		this.moleculeName.set(moleculeName);
 	}
 
 	public Molecule()
 	{
-		this.moleculeName = "unnamedMolecule";
+		this.moleculeName.set("unnamedMolecule");
 	}
 
 	/*
@@ -80,6 +81,7 @@ public class Molecule
 		this.refreshAtomicMap();
 	}
 
+	//FIXME: TEMP!
 	public void removeAllAtoms()
 	{
 		this.atoms.clear();
@@ -94,6 +96,7 @@ public class Molecule
 		this.bondOrder.add(bondOrder);
 	}
 
+	//FIXME: TEMP!
 	public void removeAllBonds()
 	{
 		this.boundAtoms.clear();
@@ -131,19 +134,6 @@ public class Molecule
 				continue;
 			}
 		}
-	}
-
-	/*
-	 * FIXME Temporary function, only for testing
-	 */
-	public void printMolecule()
-	{
-		MoleculeView.printMolecule(this);
-	}
-
-	public void importFile(String filePath)
-	{
-		MoleculeImporter.importCmlFile(this, filePath);
 	}
 
 	public ObservableList<Atom> getAtomList()
