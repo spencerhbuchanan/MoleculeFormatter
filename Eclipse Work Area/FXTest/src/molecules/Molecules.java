@@ -2,6 +2,7 @@ package molecules;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import javafx.scene.control.TableView;
 
@@ -30,6 +31,14 @@ public class Molecules
 		}
 		
 		return moleculeTables.get(moleculeName);
+	}
+	
+	//Lambda adaptor, passes in a BiConsumer and makes the BiConsumer accept the molecules name and table
+	public void forEachMoleculeTable(BiConsumer<? super String, ? super TableView<Atom>> consumer)
+	{
+		molecules.forEach((moleculeName, molecule) -> {
+			consumer.accept(moleculeName, getMoleculeTable(moleculeName));
+		});
 	}
 	
 	public void refreshMoleculeTable(String moleculeName)
