@@ -13,19 +13,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Molecule
 {
-	protected StringProperty			moleculeName;
+	protected StringProperty			moleculeName 	= new SimpleStringProperty();
 
-	protected ArrayList<Atom>		atoms		= new ArrayList<Atom>();
+	protected ArrayList<Atom>			atoms			= new ArrayList<Atom>();
 
-	protected Map<String, Integer>	atomMap		= new HashMap<String, Integer>();
+	protected Map<String, Integer>		atomMap		= new HashMap<String, Integer>();
 
-	protected ArrayList<String>		boundAtoms	= new ArrayList<String>();
+	protected ArrayList<String>		boundAtoms		= new ArrayList<String>();
 	protected ArrayList<Short>		bondOrder		= new ArrayList<Short>();
 
 	public Molecule(String moleculeName)

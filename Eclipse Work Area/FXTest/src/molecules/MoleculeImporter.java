@@ -117,7 +117,10 @@ public class MoleculeImporter
 		} catch(XMLStreamException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Dear god please do something with these errors
+			// TODO maybe a warning dialog or something? Like, for real?
+			System.err.println("Are you sure that was a .CML file?");
+			//e.printStackTrace();
 		} catch(NoSuchElementException e)
 		{
 			// TODO Auto-generated catch block

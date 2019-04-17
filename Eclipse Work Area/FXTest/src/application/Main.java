@@ -27,12 +27,8 @@ public class Main extends Application
 
 		importItem.setOnAction((event) -> {
 			final FileChooser fileChooser = new FileChooser();
-
+			
 			molecules.importMolecule("Susan", fileChooser.showOpenDialog(primaryStage).getAbsolutePath());
-
-			// TODO: Find out if the old atomTable is retained in memory (this is intended
-			// to refresh the table)
-			borderPane.setCenter(molecules.getMoleculeTable("Susan"));
 		});
 
 		fileMenu.getItems().add(importItem);
