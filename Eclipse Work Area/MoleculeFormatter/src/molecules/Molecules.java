@@ -22,6 +22,19 @@ public class Molecules
 		return molecules.get(moleculeName);
 	}
 	
+	public void renameMolecule(String oldMoleculeName, String newMoleculeName)
+	{
+		molecules.get(oldMoleculeName).moleculeName.set(newMoleculeName);
+		
+		/* Re-keys the molecule maps
+		 * The second parameter of .put can be .remove since .remove returns the old
+		 * mapped value(object)
+		 */
+		
+		molecules.put(newMoleculeName, molecules.remove(oldMoleculeName));
+		moleculeTables.put(newMoleculeName, moleculeTables.remove(oldMoleculeName));
+	}
+	
 	public TableView<Atom> getMoleculeTable(String moleculeName)
 	{
 		if(!moleculeTables.containsKey(moleculeName))

@@ -2,13 +2,16 @@ package application;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import molecules.Molecules;
@@ -41,6 +44,14 @@ public class WindowControls
 		MenuItem importItem = new MenuItem("Import");
 		MenuItem exportItem = new MenuItem("Export");		//UNIMPLEMENTED
 
+		newItem.setOnAction((event) -> {
+			molecules.createMolecule("New Molecule");
+			
+			createMoleculeTab("New Molecule", molecules.getMoleculeTable("New Molecule"));
+			
+			moleculesTabPane.getSelectionModel().selectLast();
+		});
+		
 		importItem.setOnAction((event) -> {
 			if(currentlySelectedMolecule.get() == null)
 			{
@@ -66,6 +77,7 @@ public class WindowControls
 	{
 		if(moleculesTabPane == null) createMoleculesTabPane();
 		currentlySelectedMolecule.set(moleculesTabPane.getSelectionModel().getSelectedItem().getText());
+		
 		return moleculesTabPane;
 	}
 	
@@ -74,19 +86,54 @@ public class WindowControls
 		moleculesTabPane = new TabPane();
 		
 		molecules.forEachMoleculeTable((moleculeName, moleculeTable) -> {
-			Tab tab = new Tab();
-			tab.setText(moleculeName);
-			tab.setContent(moleculeTable);
-			moleculesTabPane.getTabs().add(tab);
+			createMoleculeTab(moleculeName, moleculeTable);
 		});
 		
 		moleculesTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 			if(newTab != null)
 			{
 				currentlySelectedMolecule.set(newTab.getText());
+				System.out.println(moleculesTabPane.getSelectionModel().getSelectedItem().getGraphic());
 			} else {
 				currentlySelectedMolecule.set(null);
 			}
 		});
+	}
+	
+	private static void createMoleculeTab(String moleculeName, Node moleculeTable)
+	{
+		Tab tab = new Tab();
+		Label label = new Label(moleculeName);
+		tab.setGraphic(label);
+		
+		TextField textField = new TextField();
+		label.setOnMouseClicked((event) -> {
+			if(event.getClickCount() == 2)
+			{
+				textField.setText(label.getText());
+				tab.setGraphic(textField);
+				textField.selectAll();
+				textField.requestFocus();
+				
+				//TODO: CHECK IF THIS CHANGES THE MOLECULE NAME
+			}
+		});
+		
+		textField.setOnAction((event) -> {
+			molecules.renameMolecule(label.getText(), textField.getText());
+			
+			label.setText(textField.getText());
+			tab.setGraphic(label);
+			
+		});
+		
+		textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal == false) 						//If the tab is being unselected
+			{
+				tab.setGraphic(label);
+			}
+		});
+		
+		moleculesTabPane.getTabs().add(tab);
 	}
 }

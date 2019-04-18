@@ -14,7 +14,7 @@ public class Main extends Application
 		Molecules molecules = new Molecules();
 		molecules.createMolecule("Susan");
 		molecules.createMolecule("Karen");
-		molecules.createMolecule("Janine");
+		molecules.createMolecule("Janice");
 
 		
 		
@@ -34,7 +34,7 @@ public class Main extends Application
 	}
 
 	public static void main(String[] args)
-	{
-		launch(args);
+	{		
+		launch(args); //IGNORE BUG: Its standard
 	}
 }

@@ -24,11 +24,11 @@ public class MoleculeView
 
 	private static void printAtom(Atom atom)
 	{
-		System.out.printf("Atom ID:\t%-4s\n", atom.getAtomID());
-		System.out.printf("Element:\t%-2s\n", atom.getAtomElement());
-		System.out.printf("X Coordinate: \t%10f\n", atom.getAtomX());
-		System.out.printf("Y Coordinate: \t%10f\n", atom.getAtomY());
-		System.out.printf("Z Coordinate: \t%10f\n", atom.getAtomZ());
+		System.out.printf("Atom ID:\t%-4s%n", atom.getAtomID());
+		System.out.printf("Element:\t%-2s%n", atom.getAtomElement());
+		System.out.printf("X Coordinate: \t%10f%n", atom.getAtomX());
+		System.out.printf("Y Coordinate: \t%10f%n", atom.getAtomY());
+		System.out.printf("Z Coordinate: \t%10f%n", atom.getAtomZ());
 		System.out.print("\n");
 
 	}
@@ -45,8 +45,7 @@ public class MoleculeView
 		TableColumn<molecules.Atom, String> atomIDCol = new TableColumn<molecules.Atom, String>("Atom ID");
 		TableColumn<molecules.Atom, String> atomElementCol = new TableColumn<molecules.Atom, String>("Element");
 
-		TableColumn<molecules.Atom, Double> xyzCol // Parent column for XYZ
-				= new TableColumn<molecules.Atom, Double>("Coordinates");
+		TableColumn<molecules.Atom, Double> xyzCol = new TableColumn<molecules.Atom, Double>("Coordinates"); // Parent column for XYZ
 
 		TableColumn<molecules.Atom, Number> atomXCol = new TableColumn<molecules.Atom, Number>("X");
 		TableColumn<molecules.Atom, Number> atomYCol = new TableColumn<molecules.Atom, Number>("Y");
