@@ -1,7 +1,5 @@
 # MoleculeFormatter
-NOTE: THE CODE IN FXTEST IS THE NEW CODE.
-THE MOLECULE FORMATTER FOLDER IS OLD CODE.
-IT HAS NOT BEEN MOVED YET because I'm lazy...
+
 # To Run...
 Download the .jar file, the .bat and the .cml files, and then run the .bat file.
 
