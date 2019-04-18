@@ -2,6 +2,8 @@ package application;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -40,9 +42,18 @@ public class WindowControls
 		MenuItem exportItem = new MenuItem("Export");		//UNIMPLEMENTED
 
 		importItem.setOnAction((event) -> {
-			final FileChooser fileChooser = new FileChooser();
-			
-			molecules.importMolecule(currentlySelectedMolecule.get(), fileChooser.showOpenDialog(stage).getAbsolutePath());
+			if(currentlySelectedMolecule.get() == null)
+			{
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("No Table For Import");
+				alert.setHeaderText("No currently open Molecule available for import");
+				alert.setContentText("Try creating a Molecule table first");
+				
+				alert.showAndWait();
+			} else {
+				final FileChooser fileChooser = new FileChooser();
+				molecules.importMolecule(currentlySelectedMolecule.get(), fileChooser.showOpenDialog(stage).getAbsolutePath());
+			}
 		});
 
 		fileMenu.getItems().addAll(newItem, saveItem, importItem, exportItem);
@@ -70,7 +81,12 @@ public class WindowControls
 		});
 		
 		moleculesTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-			currentlySelectedMolecule.set(newTab.getText());
+			if(newTab != null)
+			{
+				currentlySelectedMolecule.set(newTab.getText());
+			} else {
+				currentlySelectedMolecule.set(null);
+			}
 		});
 	}
 }
