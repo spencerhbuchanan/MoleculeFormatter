@@ -53,7 +53,7 @@ public class WindowControls
 		});
 		
 		importItem.setOnAction((event) -> {
-			if(currentlySelectedMolecule.get() == null)
+			if(moleculesTabPane.getSelectionModel().getSelectedItem().getId() == null)
 			{
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("No Table For Import");
@@ -61,9 +61,9 @@ public class WindowControls
 				alert.setContentText("Try creating a Molecule table first");
 				
 				alert.showAndWait();
-			} else {
+			} else {				
 				final FileChooser fileChooser = new FileChooser();
-				molecules.importMolecule(currentlySelectedMolecule.get(), fileChooser.showOpenDialog(stage).getAbsolutePath());
+				molecules.importMolecule(moleculesTabPane.getSelectionModel().getSelectedItem().getId(), fileChooser.showOpenDialog(stage).getAbsolutePath());
 			}
 		});
 
@@ -75,8 +75,10 @@ public class WindowControls
 	
 	public static TabPane getMoleculesTabPane()
 	{
-		if(moleculesTabPane == null) createMoleculesTabPane();
-		currentlySelectedMolecule.set(moleculesTabPane.getSelectionModel().getSelectedItem().getText());
+		if(moleculesTabPane == null)
+		{
+			createMoleculesTabPane();
+		}
 		
 		return moleculesTabPane;
 	}
@@ -89,51 +91,51 @@ public class WindowControls
 			createMoleculeTab(moleculeName, moleculeTable);
 		});
 		
-		moleculesTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-			if(newTab != null)
-			{
-				currentlySelectedMolecule.set(newTab.getText());
-				System.out.println(moleculesTabPane.getSelectionModel().getSelectedItem().getGraphic());
-			} else {
-				currentlySelectedMolecule.set(null);
-			}
-		});
 	}
 	
 	private static void createMoleculeTab(String moleculeName, Node moleculeTable)
 	{
-		Tab tab = new Tab();
-		Label label = new Label(moleculeName);
-		tab.setGraphic(label);
+		Tab moleculeTab = new Tab();
+		Label moleculeTabLabel = new Label(moleculeName);
 		
-		TextField textField = new TextField();
-		label.setOnMouseClicked((event) -> {
+		moleculeTab.setId(moleculeName);
+		
+		moleculeTab.setGraphic(moleculeTabLabel);
+		moleculeTab.setContent(moleculeTable);
+		
+		TextField editingTextBox = new TextField();
+		
+		moleculeTabLabel.setOnMouseClicked((event) -> {
 			if(event.getClickCount() == 2)
 			{
-				textField.setText(label.getText());
-				tab.setGraphic(textField);
-				textField.selectAll();
-				textField.requestFocus();
-				
-				//TODO: CHECK IF THIS CHANGES THE MOLECULE NAME
+				editingTextBox.setText(moleculeTabLabel.getText());
+				moleculeTab.setGraphic(editingTextBox);
+				editingTextBox.selectAll();
+				editingTextBox.requestFocus();
 			}
 		});
 		
-		textField.setOnAction((event) -> {
-			molecules.renameMolecule(label.getText(), textField.getText());
+		//If Enter key is hit
+		editingTextBox.setOnAction((event) -> {
+			molecules.renameMolecule(moleculeTabLabel.getText(), editingTextBox.getText());
+			//TODO: CHECK IF THIS CHANGES THE MOLECULE NAME
+			moleculeTab.setId(editingTextBox.getText());
 			
-			label.setText(textField.getText());
-			tab.setGraphic(label);
+			moleculeTabLabel.setText(editingTextBox.getText());
+			moleculeTab.setGraphic(moleculeTabLabel);
 			
 		});
 		
-		textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
-			if(newVal == false) 						//If the tab is being unselected
+		//If clicked out of
+		editingTextBox.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			//If the tab is being unselected
+			if(newVal == false)
 			{
-				tab.setGraphic(label);
+				moleculeTab.setGraphic(moleculeTabLabel);
 			}
 		});
 		
-		moleculesTabPane.getTabs().add(tab);
+		
+		moleculesTabPane.getTabs().add(moleculeTab);
 	}
 }
