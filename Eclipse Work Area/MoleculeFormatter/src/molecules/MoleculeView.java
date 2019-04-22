@@ -30,7 +30,6 @@ public class MoleculeView
 		System.out.printf("Y Coordinate: \t%10f%n", atom.getAtomY());
 		System.out.printf("Z Coordinate: \t%10f%n", atom.getAtomZ());
 		System.out.print("\n");
-
 	}
 
 	@SuppressWarnings("unchecked")

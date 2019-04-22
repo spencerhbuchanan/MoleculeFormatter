@@ -45,9 +45,9 @@ public class WindowControls
 		MenuItem exportItem = new MenuItem("Export");		//UNIMPLEMENTED
 
 		newItem.setOnAction((event) -> {
-			molecules.createMolecule("New Molecule");
+			String newMoleculeID = molecules.createMolecule("New Molecule");
 			
-			createMoleculeTab("New Molecule", molecules.getMoleculeTable("New Molecule"));
+			createMoleculeTab(newMoleculeID, molecules.getMolecule(newMoleculeID).getMoleculeName(), molecules.getMoleculeTable(newMoleculeID));
 			
 			moleculesTabPane.getSelectionModel().selectLast();
 		});
@@ -87,18 +87,20 @@ public class WindowControls
 	{
 		moleculesTabPane = new TabPane();
 		
-		molecules.forEachMoleculeTable((moleculeName, moleculeTable) -> {
-			createMoleculeTab(moleculeName, moleculeTable);
+		molecules.forEachMoleculeID((moleculeID) -> {
+			String moleculeName = molecules.getMolecule(moleculeID).getMoleculeName();
+			Node moleculeTable = molecules.getMoleculeTable(moleculeID);
+			
+			createMoleculeTab(moleculeID, moleculeName, moleculeTable);
 		});
-		
 	}
 	
-	private static void createMoleculeTab(String moleculeName, Node moleculeTable)
+	private static void createMoleculeTab(String moleculeID, String moleculeName, Node moleculeTable)
 	{
 		Tab moleculeTab = new Tab();
 		Label moleculeTabLabel = new Label(moleculeName);
 		
-		moleculeTab.setId(moleculeName);
+		moleculeTab.setId(moleculeID);
 		
 		moleculeTab.setGraphic(moleculeTabLabel);
 		moleculeTab.setContent(moleculeTable);
@@ -117,13 +119,11 @@ public class WindowControls
 		
 		//If Enter key is hit
 		editingTextBox.setOnAction((event) -> {
-			molecules.renameMolecule(moleculeTabLabel.getText(), editingTextBox.getText());
+			molecules.renameMolecule(moleculeID, editingTextBox.getText());
 			//TODO: CHECK IF THIS CHANGES THE MOLECULE NAME
-			moleculeTab.setId(editingTextBox.getText());
 			
 			moleculeTabLabel.setText(editingTextBox.getText());
 			moleculeTab.setGraphic(moleculeTabLabel);
-			
 		});
 		
 		//If clicked out of

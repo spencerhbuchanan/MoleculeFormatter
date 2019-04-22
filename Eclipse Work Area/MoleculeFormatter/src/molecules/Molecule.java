@@ -38,9 +38,19 @@ public class Molecule
 	{
 		this.moleculeName.set("unnamedMolecule");
 	}
+	
+	public String getMoleculeName()
+	{
+		return moleculeName.get();
+	}
+	
+	public void setMoleculeName(String newMoleculeName)
+	{
+		moleculeName.set(newMoleculeName);
+	}
 
 	/*
-	 * Basic Constructor
+	 * Basic Atom creator
 	 * 
 	 * Used when: Only atomID is given
 	 * 
@@ -56,7 +66,7 @@ public class Molecule
 	}
 
 	/*
-	 * Extended Constructor
+	 * Extended Atom creator
 	 * 
 	 * Used when: Atom ID, element, and coordinates are given
 	 * 

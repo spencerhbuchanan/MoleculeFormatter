@@ -2,7 +2,7 @@ package molecules;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import javafx.scene.control.TableView;
 
@@ -11,46 +11,45 @@ public class Molecules
 	protected Map<String, Molecule>		molecules			= new HashMap<String, Molecule>();
 	protected Map<String, TableView<Atom>>	moleculeTables		= new HashMap<String, TableView<Atom>>();
 	
-	public void createMolecule(String moleculeName)
+	protected int nextMoleculeID = 1;
+	
+	public String createMolecule(String moleculeName)
 	{
 		Molecule molecule = new Molecule(moleculeName);
-		molecules.put(moleculeName, molecule);
-	}
-	
-	public Molecule getMolecule(String moleculeName)
-	{
-		return molecules.get(moleculeName);
-	}
-	
-	public void renameMolecule(String oldMoleculeName, String newMoleculeName)
-	{
-		molecules.get(oldMoleculeName).moleculeName.set(newMoleculeName);
 		
-		/* Re-keys the molecule maps
-		 * The second parameter of .put can be .remove since .remove returns the old
-		 * mapped value(object)
-		 */
+		String newMoleculesID = Integer.toHexString(nextMoleculeID); 
+		molecules.put(newMoleculesID, molecule);
 		
-		molecules.put(newMoleculeName, molecules.remove(oldMoleculeName));
-		moleculeTables.put(newMoleculeName, moleculeTables.remove(oldMoleculeName));
+		nextMoleculeID++;
+		
+		return newMoleculesID;
 	}
 	
-	public TableView<Atom> getMoleculeTable(String moleculeName)
+	public Molecule getMolecule(String moleculeID)
 	{
-		if(!moleculeTables.containsKey(moleculeName))
+		return molecules.get(moleculeID);
+	}
+	
+	public void renameMolecule(String moleculeID, String newMoleculeName)
+	{
+		molecules.get(moleculeID).setMoleculeName(newMoleculeName);
+	}
+	
+	public TableView<Atom> getMoleculeTable(String moleculeID)
+	{
+		if(moleculeTables.get(moleculeID) == null)
 		{
-			TableView<Atom> tableView = MoleculeView.addAtomTable(molecules.get(moleculeName));
-			moleculeTables.put(moleculeName, tableView);
+			moleculeTables.put(moleculeID, MoleculeView.addAtomTable(molecules.get(moleculeID)));
 		}
 		
-		return moleculeTables.get(moleculeName);
+		return moleculeTables.get(moleculeID);
 	}
 	
 	//Lambda adaptor, passes in a BiConsumer and makes the BiConsumer accept the molecules name and table
-	public void forEachMoleculeTable(BiConsumer<? super String, ? super TableView<Atom>> consumer)
+	public void forEachMoleculeID(Consumer<? super String> consumer)
 	{
-		molecules.forEach((moleculeName, molecule) -> {
-			consumer.accept(moleculeName, getMoleculeTable(moleculeName));
+		molecules.forEach((moleculeID, molecule) -> {
+			consumer.accept(moleculeID);
 		});
 	}
 	
@@ -59,16 +58,12 @@ public class Molecules
 		moleculeTables.get(moleculeName).setItems(molecules.get(moleculeName).getAtomList());
 	}
 	
-	public void importMolecule(String toMolecule, String filePath)
+	public void importMolecule(String moleculeID, String filePath)
 	{
-		//TODO: ALWAYS OVERRITES MOLECULE WITH A NEW MOLECULE OBJECT OF THE SAME NAME
-		molecules.put(toMolecule, new Molecule(toMolecule));	//Overwrites previous Molecule reference with a new Molecule reference
+		molecules.put(moleculeID, new Molecule(molecules.get(moleculeID).getMoleculeName()));
 		
-		//By this point, the Molecule references should be clean. AKA: Fresh Molecule
-		//Additionally, the old Molecule should be picked up by Garbage Collection
+		MoleculeImporter.importCmlFile(molecules.get(moleculeID), filePath);
 		
-		MoleculeImporter.importCmlFile(molecules.get(toMolecule), filePath);
-		
-		refreshMoleculeTable(toMolecule);					//Refreshed the table with the NEWLY IMPORTED molecule
+		refreshMoleculeTable(moleculeID);
 	}
 }
