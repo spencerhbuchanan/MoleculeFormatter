@@ -1,4 +1,4 @@
-package application;
+package molecules;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -14,6 +14,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 
+/**
+ * <h1>Coordinate Cell Factory</h1> 
+ * Creates a cell factory to be used in the Molecule table
+ * which can be edited either by a spinner or by direct
+ * typing. 
+ * 
+ * @author Spencer Buchanan
+ * @version 0.1
+ * @since 2019-21-04
+ */
 public class CoordinateCellFactory extends TableCell<molecules.Atom, Number>
 {
 	private Spinner<Double> coordinateSpinner;

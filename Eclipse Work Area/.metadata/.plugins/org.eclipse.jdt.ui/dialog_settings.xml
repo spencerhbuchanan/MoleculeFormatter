@@ -2,23 +2,25 @@
 <section name="Workbench">
 	<item value="true" key="org.eclipse.jdt.ui.codeformatter.create_profile_dialog.open_edit"/>
 	<item value="3" key="TypeHierarchyViewPart.orientation"/>
+	<item value="false" key="org.eclipse.jdt.ui.formatter_page.show_invisible_characters"/>
 	<item value="697" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_x"/>
 	<item value="0" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_y"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
-	<item value="40" key="org.eclipse.jdt.ui.codeformatter.line_wrapping_tab_page.preview_line_width"/>
+	<item value="128" key="org.eclipse.jdt.ui.codeformatter.line_wrapping_tab_page.preview_line_width"/>
 	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
 	<item value="false" key="delegateUpdating"/>
-	<item value="01..0.0.110.0.0.0.0.0.0.0.0.0..10.0.0.0.0.0.0.0.0.0.0..00.0.0.0.0.0..00.0.0.0..00.0.0.0...00.0..00.00..0..010.0.0.0.0.0.0.0.0.0...00.0..0.." key="org.eclipse.jdt.uiformatter_page.preference_tree_expansion"/>
+	<item value="01..0.0.010.0.0.0.0.0.0.0.0.0..10.0.0.0.0.0.0.0.0.0.0..00.0.0.0.0.0..00.0.0.0..00.0.0.0...00.0..00.00..0..110.0.0.0.0.0.0.0.1.0...00.0..0.." key="org.eclipse.jdt.uiformatter_page.preference_tree_expansion"/>
 	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
-	<item value="520" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.sash_form_left_width"/>
+	<item value="521" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.sash_form_left_width"/>
 	<item value="1223" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_width"/>
 	<item value="760" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_height"/>
-	<item value="0" key="org.eclipse.jdt.uiformatter_page.preference_scroll_position"/>
+	<item value="53" key="org.eclipse.jdt.uiformatter_page.preference_scroll_position"/>
 	<item value="C:\Users\shbuchanan3669\Downloads\styleguide-gh-pages\styleguide-gh-pages" key="org.eclipse.jdt.ui.codeformatter.loadpath"/>
-	<item value="88" key="org.eclipse.jdt.uiformatter_page.last_focus_index"/>
+	<item value="336" key="org.eclipse.jdt.uiformatter_page.last_focus_index"/>
 	<item value="filter_imports;" key="filters_last_used"/>
-	<item value="662" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.sash_form_rigth_width"/>
+	<item value="665" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.sash_form_rigth_width"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
 		<item value="false" key="updateQualifiedNames"/>
 		<item value="*" key="patterns"/>
 		<item value="false" key="updateSimilarElements"/>
@@ -88,6 +90,46 @@
 			<item value=".xml"/>
 		</list>
 	</section>
+	<section name="javadoc">
+		<item value="-classpath C:\Users\Spencer Buchanan\OneDrive - Florida Gulf Coast University\COP 2006\eclipse\plugins" key="vmparam"/>
+		<item value="public" key="access"/>
+		<item value="false" key="noindex"/>
+		<item value="C:\Users\Spencer Buchanan\Desktop\Github\MoleculeFormatter\Eclipse Work Area\MoleculeFormatter\javadoc.xml" key="antpath"/>
+		<item value="false" key="nodeprecatedlist"/>
+		<item value="true" key="use"/>
+		<item value="true" key="author"/>
+		<item value="false" key="nodeprecated"/>
+		<item value="false" key="nonavbar"/>
+		<item value="" key="docletpath"/>
+		<item value="C:\Program Files\Java\jdk-11.0.1\bin\javadoc.exe;C:\Program Files\Java\jdk-11.0.1\bin\javadoc.exe -" key="javadoc_command_history"/>
+		<item value="1.8" key="source"/>
+		<item value="true" key="version"/>
+		<item value="" key="docletname"/>
+		<item value="true" key="splitindex"/>
+		<item value="true" key="fromStandard"/>
+		<item value="false" key="notree"/>
+		<item value="C:\Users\Spencer Buchanan\Desktop" key="destdir"/>
+		<item value="false" key="openinbrowser"/>
+		<section name="projects">
+			<section name="MoleculeFormatter">
+				<item value="C:\Users\Spencer Buchanan\Desktop\Github\MoleculeFormatter\Eclipse Work Area\MoleculeFormatter\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Spencer Buchanan\Desktop" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+		</section>
+	</section>
+	<section name="DialogBounds_AddDelegateMethodsDialog">
+		<item value="508" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-21|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="533" key="DIALOG_HEIGHT"/>
+		<item value="712" key="DIALOG_X_ORIGIN"/>
+		<item value="173" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="SourceActionDialog.methods">
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="false" key="FinalModifier"/>
+	</section>
 	<section name="BreadcrumbItemDropDown">
 	</section>
 	<section name="RenameInformationPopup">
@@ -116,6 +158,13 @@
 			<list key="workingSets">
 			</list>
 		</section>
+	</section>
+	<section name="JavadocWizardDialog">
+		<item value="572" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-21|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="626" key="DIALOG_HEIGHT"/>
+		<item value="802" key="DIALOG_X_ORIGIN"/>
+		<item value="87" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

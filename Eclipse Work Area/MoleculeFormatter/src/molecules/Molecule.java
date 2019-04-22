@@ -1,12 +1,3 @@
-/*
- * Author: Spencer Buchanan
- * 
- * Desc: Contains atoms that make up a molecule
- * 
- * Stores: atoms boundAtoms bondOrders
- * 
- */
-
 package molecules;
 
 import java.util.ArrayList;
@@ -18,6 +9,14 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * <h1>Molecule Class</h1> 
+ * Acts as a container for multiple Atoms
+ * 
+ * @author Spencer Buchanan
+ * @version 0.1
+ * @since 2019-21-04
+ */
 public class Molecule
 {
 	protected StringProperty			moleculeName 	= new SimpleStringProperty();
@@ -29,33 +28,44 @@ public class Molecule
 	protected ArrayList<String>		boundAtoms		= new ArrayList<String>();
 	protected ArrayList<Short>		bondOrder		= new ArrayList<Short>();
 
+	/**
+	 * Molecule Constructor with name provided
+	 * @param moleculeName
+	 */
 	public Molecule(String moleculeName)
 	{
 		this.moleculeName.set(moleculeName);
 	}
 
+	/**
+	 * Molecule Constructor with no name provided
+	 */
 	public Molecule()
 	{
 		this.moleculeName.set("unnamedMolecule");
 	}
 	
+	/**
+	 * Gets the molecule's name
+	 * @return String Name of the molecule
+	 */
 	public String getMoleculeName()
 	{
 		return moleculeName.get();
 	}
 	
+	/**
+	 * Sets the molecule's name
+	 * @param newMoleculeName
+	 */
 	public void setMoleculeName(String newMoleculeName)
 	{
 		moleculeName.set(newMoleculeName);
 	}
 
-	/*
-	 * Basic Atom creator
-	 * 
-	 * Used when: Only atomID is given
-	 * 
-	 * First a new atom object is created, then the ID passed to the method is put
-	 * into the newest atom object (at the end of the atoms ArrayList)
+	/**
+	 * Adds an atom to the molecule, only specifying its ID 
+	 * @param atomID
 	 */
 	public void addAtom(String atomID)
 	{
@@ -65,14 +75,13 @@ public class Molecule
 		this.refreshAtomicMap();
 	}
 
-	/*
-	 * Extended Atom creator
-	 * 
-	 * Used when: Atom ID, element, and coordinates are given
-	 * 
-	 * First a new atom object is created, and the index of the newest element is
-	 * stored (at the end, so index = sizeOf(atoms)). Then, the information passed
-	 * to the constructor is transfered to the Atom object.
+	/**
+	 * Adds an atom to the molecule, specifying its ID, Element, and coordinates
+	 * @param atomID
+	 * @param atomElement
+	 * @param atomXCoordinate
+	 * @param atomYCoordinate
+	 * @param atomZCoordinate
 	 */
 	public void addAtom(String atomID, String atomElement, double atomXCoordinate, double atomYCoordinate, double atomZCoordinate)
 	{
@@ -92,14 +101,13 @@ public class Molecule
 		this.refreshAtomicMap();
 	}
 
-	//FIXME: TEMP!
-	public void removeAllAtoms()
-	{
-		this.atoms.clear();
-	}
-
-	/*
-	 * TODO: Add bond storage into the Atom class.
+	/**
+	 * Adds a bond to the molecule, specifying the bound atoms and the bond order
+	 * <p>
+	 * <b>FUNCTIONALITY UNIMPLEMENTED. ONLY STORES THE BONDS.</b>
+	 * 
+	 * @param boundAtoms	The bonded atoms, specified by their ID's
+	 * @param bondOrder	The order of the bond (Often from 1 to 3)
 	 */
 	public void addBond(String boundAtoms, short bondOrder)
 	{
@@ -107,15 +115,10 @@ public class Molecule
 		this.bondOrder.add(bondOrder);
 	}
 
-	//FIXME: TEMP!
-	public void removeAllBonds()
-	{
-		this.boundAtoms.clear();
-		this.bondOrder.clear();
-	}
-
-	/*
-	 * Refreshes a map which is used to access atoms via their ID's
+	/**
+	 * Refreshes a map which can be used to access atoms by their ID
+	 * <p>
+	 * <b>MAY BE REMOVED IN FUTURE</b>
 	 */
 	private void refreshAtomicMap()
 	{
@@ -147,12 +150,13 @@ public class Molecule
 		}
 	}
 
+	/**
+	 * Returns an ObservableList of the atoms array list
+	 * @return ObservableList Observable list of the atoms in the molecule
+	 */
 	public ObservableList<Atom> getAtomList()
 	{
-
 		ObservableList<Atom> observableAtoms = FXCollections.observableArrayList(this.atoms);
-
-		// GIMME LISTENERS!
 
 		return observableAtoms;
 	}

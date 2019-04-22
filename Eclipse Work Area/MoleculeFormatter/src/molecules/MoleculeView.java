@@ -1,10 +1,5 @@
-/*
- * Author: Spencer Buchanan
- */
-
 package molecules;
 
-import application.CoordinateCellFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -13,8 +8,22 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
+/**
+ * <h1>Molecule View</h1> 
+ * Generally used to generate views of the molecule in multiple formats
+ * 
+ * @author Spencer Buchanan
+ * @version 0.1
+ * @since 2019-21-04
+ */
 public class MoleculeView
 {
+
+	/**
+	 * Prints the passed molecule's ID, element, and coordinates
+	 * 
+	 * @param molecule Molecule to print
+	 */
 	public static void printMolecule(Molecule molecule)
 	{
 		System.out.println("Atoms in the molecule " + molecule.moleculeName);
@@ -32,23 +41,30 @@ public class MoleculeView
 		System.out.print("\n");
 	}
 
+	/**
+	 * Creates a table view for the passed molecule
+	 * 
+	 * @param molecule The molecule to generate a table view for
+	 * @return TableView The generated TableView
+	 */
 	@SuppressWarnings("unchecked")
-	public static TableView<molecules.Atom> addAtomTable(Molecule molecule)
+	public static TableView<Atom> addAtomTable(Molecule molecule)
 	{
-		TableView<molecules.Atom> moleculeTable = new TableView<molecules.Atom>();
+		TableView<Atom> moleculeTable = new TableView<Atom>();
 
 		moleculeTable.setEditable(true);
 
-		// Creates a new column, with type (object, valuetype), and gives the column a
+		// Creates a new column, with type (object, value type), and gives the column a
 		// title
-		TableColumn<molecules.Atom, String> atomIDCol = new TableColumn<molecules.Atom, String>("Atom ID");
-		TableColumn<molecules.Atom, String> atomElementCol = new TableColumn<molecules.Atom, String>("Element");
+		TableColumn<Atom, String> atomIDCol = new TableColumn<Atom, String>("Atom ID");
+		TableColumn<Atom, String> atomElementCol = new TableColumn<Atom, String>("Element");
 
-		TableColumn<molecules.Atom, Double> xyzCol = new TableColumn<molecules.Atom, Double>("Coordinates"); // Parent column for XYZ
+		//Parent column for XYZ coordinates
+		TableColumn<Atom, Double> xyzCol = new TableColumn<Atom, Double>("Coordinates");
 
-		TableColumn<molecules.Atom, Number> atomXCol = new TableColumn<molecules.Atom, Number>("X");
-		TableColumn<molecules.Atom, Number> atomYCol = new TableColumn<molecules.Atom, Number>("Y");
-		TableColumn<molecules.Atom, Number> atomZCol = new TableColumn<molecules.Atom, Number>("Z");
+		TableColumn<Atom, Number> atomXCol = new TableColumn<Atom, Number>("X");
+		TableColumn<Atom, Number> atomYCol = new TableColumn<Atom, Number>("Y");
+		TableColumn<Atom, Number> atomZCol = new TableColumn<Atom, Number>("Z");
 
 		atomIDCol.setMinWidth(40);
 		atomElementCol.setMinWidth(40);
@@ -57,32 +73,32 @@ public class MoleculeView
 
 		// Atom ID
 		atomIDCol.setCellValueFactory(cellData -> cellData.getValue().atomIDProperty());
-		atomIDCol.setCellFactory(TextFieldTableCell.<molecules.Atom>forTableColumn());
+		atomIDCol.setCellFactory(TextFieldTableCell.<Atom>forTableColumn());
 
 		// On Edit Commit (for Atom ID Column)
-		atomIDCol.setOnEditCommit((CellEditEvent<molecules.Atom, String> event) -> {
-			TablePosition<molecules.Atom, String> pos = event.getTablePosition();
+		atomIDCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
+			TablePosition<Atom, String> pos = event.getTablePosition();
 
 			String newAtomID = event.getNewValue();
 
 			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
+			Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomID(newAtomID);
 		});
 
 		// Atom Element
 		atomElementCol.setCellValueFactory(cellData -> cellData.getValue().atomElementProperty());
-		atomElementCol.setCellFactory(TextFieldTableCell.<molecules.Atom>forTableColumn());
+		atomElementCol.setCellFactory(TextFieldTableCell.<Atom>forTableColumn());
 
 		// On Edit Commit (for Element Column)
-		atomElementCol.setOnEditCommit((CellEditEvent<molecules.Atom, String> event) -> {
-			TablePosition<molecules.Atom, String> pos = event.getTablePosition();
+		atomElementCol.setOnEditCommit((CellEditEvent<Atom, String> event) -> {
+			TablePosition<Atom, String> pos = event.getTablePosition();
 
 			String newAtomElement = event.getNewValue();
 
 			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
+			Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomElement(newAtomElement);
 
@@ -90,23 +106,18 @@ public class MoleculeView
 		});
 
 		// Number Fields (atom x y z)
-
+		
 		/*
 		 * This creates a callback for the table item from the class
-		 * CoordinateCellFactory, which decides how the cell is rendered. The callback
-		 * is typed to the TableColumn and TableCell, and those are typed to
-		 * molecules.Atom and Number
+		 * CoordinateCellFactory, which decides how the cell is rendered.
 		 * 
-		 * TODO: Maybe find a better way to format these lines, they ugly and long
+		 * Allows the table cell to be editable with a spinner.
 		 */
-		Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>> coordinateColumnFactory = new Callback<TableColumn<molecules.Atom, Number>, TableCell<molecules.Atom, Number>>(){
-			@Override
-			public TableCell<molecules.Atom, Number> call(TableColumn<molecules.Atom, Number> eggplant)
-			{
-				return new CoordinateCellFactory();
-			}
-		};
-
+		Callback<	TableColumn<Atom, Number>,
+				TableCell<Atom, Number>> coordinateColumnFactory = (TableColumn<Atom, Number> egg) -> {
+					return new CoordinateCellFactory();
+				};
+				
 		// TODO: Find good width for XYZ cells
 
 		// Coordinates Display
@@ -119,43 +130,33 @@ public class MoleculeView
 		atomZCol.setCellFactory(coordinateColumnFactory);
 
 		// On Edit Commits
-		atomXCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
-			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+		atomXCol.setOnEditCommit((CellEditEvent<Atom, Number> event) -> {
+			TablePosition<Atom, Number> pos = event.getTablePosition();
 
 			double newAtomX = event.getNewValue().doubleValue();
 
 			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
+			Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomX(newAtomX);
 		});
-		atomXCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
-			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
-
-			double newAtomX = event.getNewValue().doubleValue();
-
-			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
-
-			atom.setAtomX(newAtomX);
-		});
-		atomYCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
-			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+		atomYCol.setOnEditCommit((CellEditEvent<Atom, Number> event) -> {
+			TablePosition<Atom, Number> pos = event.getTablePosition();
 
 			double newAtomY = event.getNewValue().doubleValue();
 
 			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
+			Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomY(newAtomY);
 		});
-		atomZCol.setOnEditCommit((CellEditEvent<molecules.Atom, Number> event) -> {
-			TablePosition<molecules.Atom, Number> pos = event.getTablePosition();
+		atomZCol.setOnEditCommit((CellEditEvent<Atom, Number> event) -> {
+			TablePosition<Atom, Number> pos = event.getTablePosition();
 
 			double newAtomZ = event.getNewValue().doubleValue();
 
 			int row = pos.getRow();
-			molecules.Atom atom = event.getTableView().getItems().get(row);
+			Atom atom = event.getTableView().getItems().get(row);
 
 			atom.setAtomZ(newAtomZ);
 		});
