@@ -16,6 +16,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import molecules.Molecules;
 
+/**
+ * <h1>Window Controls</h1>
+ * Builds up the controls for the formatters window.
+ * Also builds the Molecules Tab Pane
+ * 
+ * @author Spencer Buchanan
+ * @version 0.1
+ * @since 2019-22-04
+ */
 public class WindowControls
 {
 	static Stage			stage;
@@ -24,16 +33,29 @@ public class WindowControls
 	static StringProperty	currentlySelectedMolecule	= new SimpleStringProperty();
 	static TabPane			moleculesTabPane;
 
+	/**
+	 * Sets the primary stage for the class, really only used
+	 * for the file chooser
+	 * @param stage
+	 */
 	public static void setStage(Stage stage)
 	{
 		WindowControls.stage = stage;
 	}
 
+	/**
+	 * Sets the Molecules object for the table to be based off of
+	 * @param molecules
+	 */
 	public static void setMolecules(Molecules molecules)
 	{
 		WindowControls.molecules = molecules;
 	}
 
+	/**
+	 * Creates and returns the MenuBar to be displayed at the top of the window (file, edit, etc.)
+	 * @return The MenuBar to be displayed at the top of the window
+	 */
 	public static MenuBar createToolbar()
 	{
 		MenuBar menuBar = new MenuBar();
@@ -77,6 +99,10 @@ public class WindowControls
 		return menuBar;
 	}
 
+	/**
+	 * Returns the TabPane containing tables for the Molecules
+	 * @return The TabPane containing the Tables for the Molecules
+	 */
 	public static TabPane getMoleculesTabPane()
 	{
 		if(moleculesTabPane == null)
@@ -87,7 +113,10 @@ public class WindowControls
 		return moleculesTabPane;
 	}
 
-	public static void createMoleculesTabPane()
+	/**
+	 * Creates the TabPane for this instance of WindowControls. Usually only runs once at startup.
+	 */
+	private static void createMoleculesTabPane()
 	{
 		moleculesTabPane = new TabPane();
 
@@ -99,6 +128,12 @@ public class WindowControls
 		});
 	}
 
+	/**
+	 * Creates a singular tab containing a Molecules table and adds it to the tab pane 
+	 * @param moleculeID		Which molecule to make the tab for
+	 * @param moleculeName	Name of the molecule (essentially the tab)
+	 * @param moleculeTable	The moleculeTable to display
+	 */
 	private static void createMoleculeTab(String moleculeID, String moleculeName, Node moleculeTable)
 	{
 		Tab moleculeTab = new Tab();
