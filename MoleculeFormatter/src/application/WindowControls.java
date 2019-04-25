@@ -1,5 +1,8 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
@@ -14,6 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import molecules.MoleculeExporter;
 import molecules.Molecules;
 
 /**
@@ -77,9 +81,11 @@ public class WindowControls
 		});
 
 		importItem.setOnAction((event) -> {
-			if(moleculesTabPane.getSelectionModel().getSelectedItem().getId() == null)
+			if(moleculesTabPane.getSelectionModel().getSelectedItem() == null)
 			{
+				// TODO: Decide if this should just make a new table instead
 				Alert alert = new Alert(AlertType.ERROR);
+				
 				alert.setTitle("No Table For Import");
 				alert.setHeaderText("No currently open Molecule available for import");
 				alert.setContentText("Try creating a Molecule table first");
@@ -87,12 +93,79 @@ public class WindowControls
 				alert.showAndWait();
 			} else
 			{
+				// TODO: Add checks to be sure the file is an acceptable format
+				// TODO: Ask user if they want to overwrite the current table
 				final FileChooser fileChooser = new FileChooser();
-				molecules.importMolecule(moleculesTabPane.getSelectionModel().getSelectedItem().getId(),
-									fileChooser.showOpenDialog(stage).getAbsolutePath());
+				final FileChooser.ExtensionFilter extensionFilter = 
+						new FileChooser.ExtensionFilter("Chemical Markup Language files (*.cml)", "*.cml");
+				
+				fileChooser.getExtensionFilters().add(extensionFilter);
+				
+				String moleculeToImportToID = moleculesTabPane.getSelectionModel().getSelectedItem().getId();
+				File fileToImport = fileChooser.showOpenDialog(stage);
+				
+				if(fileToImport == null)
+				{
+					Alert alert = new Alert(AlertType.ERROR);
+
+					alert.setTitle("No File Selected");
+					alert.setHeaderText("No file selected to import");
+
+					alert.showAndWait();
+				} else
+				{
+					molecules.importMolecule(moleculeToImportToID, fileToImport);
+				}
 			}
 		});
 
+		exportItem.setOnAction((event) -> {
+			if(moleculesTabPane.getSelectionModel().getSelectedItem() == null)
+			{
+				Alert alert = new Alert(AlertType.ERROR);
+
+				alert.setTitle("No Table For Export");
+				alert.setHeaderText("No currently open or selected molecule for export");
+				alert.setContentText("Try creating a Molecule table first");
+
+				alert.showAndWait();
+			} else
+			{
+				final FileChooser fileChooser = new FileChooser();
+				final FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("XYZ File (*.xyz), ", "*.xyz");
+				
+				fileChooser.getExtensionFilters().add(extensionFilter);
+				
+				String moleculeToExportID = moleculesTabPane.getSelectionModel().getSelectedItem().getId();
+				File fileExportDestination = fileChooser.showSaveDialog(stage);
+
+				if(fileExportDestination == null)
+				{
+					Alert alert = new Alert(AlertType.ERROR);
+
+					alert.setTitle("Error on File Write");
+					alert.setHeaderText("No file selected");
+
+					alert.showAndWait();
+
+				} else
+				{
+					try
+					{
+						MoleculeExporter.exportMoleculeAsXYZ(molecules.getMolecule(moleculeToExportID), fileExportDestination);
+					} catch(IOException e)
+					{
+						Alert alert = new Alert(AlertType.ERROR);
+
+						alert.setTitle("Error on File Write");
+						alert.setHeaderText("There was an error when trying to export the file");
+
+						alert.showAndWait();
+					}
+				}
+			}
+		});
+		
 		fileMenu.getItems().addAll(newItem, saveItem, importItem, exportItem);
 		menuBar.getMenus().add(fileMenu);
 

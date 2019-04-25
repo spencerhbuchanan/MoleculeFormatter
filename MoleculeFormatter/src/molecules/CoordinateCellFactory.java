@@ -15,8 +15,10 @@ import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 
 /**
- * <h1>Coordinate Cell Factory</h1> Creates a cell factory to be used in the
- * Molecule table which can be edited either by a spinner or by direct typing.
+ * <h1>Coordinate Cell Factory</h1> 
+ * Creates a cell factory to be used in the
+ * Molecule table which can be edited either 
+ * by a spinner or by direct typing.
  * 
  * @author Spencer Buchanan
  * @version 0.1
@@ -131,6 +133,9 @@ public class CoordinateCellFactory extends TableCell<molecules.Atom, Number>
 					return df.parse(value).doubleValue();
 				} catch(ParseException ex)
 				{
+					// TODO: Actually handle this, idiot.
+					// Yeah, it doesn't crash, but it also 
+					// spits out errors in the console
 					throw new RuntimeException(ex);
 				}
 			}

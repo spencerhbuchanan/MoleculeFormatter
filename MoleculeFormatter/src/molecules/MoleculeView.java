@@ -24,7 +24,7 @@ public class MoleculeView
 	 * 
 	 * @param molecule Molecule to print
 	 */
-	public static void printMolecule(Molecule molecule)
+	public static void printMolecule(MoleculeModel molecule)
 	{
 		System.out.println("Atoms in the molecule " + molecule.moleculeName);
 
@@ -48,7 +48,7 @@ public class MoleculeView
 	 * @return TableView The generated TableView
 	 */
 	@SuppressWarnings("unchecked")
-	public static TableView<Atom> addAtomTable(Molecule molecule)
+	public static TableView<Atom> addAtomTable(MoleculeModel molecule)
 	{
 		TableView<Atom> moleculeTable = new TableView<Atom>();
 

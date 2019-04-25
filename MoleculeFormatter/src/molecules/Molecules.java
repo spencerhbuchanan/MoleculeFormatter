@@ -1,5 +1,6 @@
 package molecules;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -16,7 +17,7 @@ import javafx.scene.control.TableView;
  */
 public class Molecules
 {
-	protected Map<String, Molecule>		molecules		= new HashMap<String, Molecule>();
+	protected Map<String, MoleculeModel>		molecules		= new HashMap<String, MoleculeModel>();
 	protected Map<String, TableView<Atom>>	moleculeTables	= new HashMap<String, TableView<Atom>>();
 
 	protected int						nextMoleculeID	= 1;
@@ -29,7 +30,7 @@ public class Molecules
 	 */
 	public String createMolecule(String moleculeName)
 	{
-		Molecule molecule = new Molecule(moleculeName);
+		MoleculeModel molecule = new MoleculeModel(moleculeName);
 
 		String newMoleculesID = Integer.toHexString(nextMoleculeID);
 		molecules.put(newMoleculesID, molecule);
@@ -46,7 +47,7 @@ public class Molecules
 	 * @param moleculeID
 	 * @return Molecule The Molecule with the specified ID
 	 */
-	public Molecule getMolecule(String moleculeID)
+	public MoleculeModel getMolecule(String moleculeID)
 	{
 		return molecules.get(moleculeID);
 	}
@@ -112,16 +113,16 @@ public class Molecules
 	 * corresponding ID
 	 * 
 	 * @param moleculeID
-	 * @param filePath
+	 * @param fileToImport
 	 */
-	public void importMolecule(String moleculeID, String filePath)
+	public void importMolecule(String moleculeID, File fileToImport)
 	{
-		molecules.put(moleculeID, new Molecule(molecules.get(moleculeID).getMoleculeName())); // Overwrites the currently
+		molecules.put(moleculeID, new MoleculeModel(molecules.get(moleculeID).getMoleculeName())); // Overwrites the currently
 																				// stored molecule with a
 																				// fresh molecule object
 
-		MoleculeImporter.importCmlFile(molecules.get(moleculeID), filePath); // Imports the molecule file at the specified
-																// path into the now clean molecule
+		MoleculeImporter.importCmlFile(molecules.get(moleculeID), fileToImport); 	// Imports the molecule file at the specified
+																	// path into the now clean molecule
 
 		refreshMoleculeTable(moleculeID); // Refreshes the molecule so that the displayed reflects the import
 	}

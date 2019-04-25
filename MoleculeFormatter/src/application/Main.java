@@ -33,6 +33,6 @@ public class Main extends Application
 
 	public static void main(String[] args)
 	{
-		launch(args); // IGNORE BUG: Its standard
+		launch(args); // IGNORE BUG: Its standard format
 	}
 }

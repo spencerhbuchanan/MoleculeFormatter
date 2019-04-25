@@ -1,5 +1,6 @@
 package molecules;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.NoSuchElementException;
@@ -13,8 +14,9 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 /**
- * <h1>Molecule Importer</h1> This class interprets files to import them into a
- * molecule
+ * <h1>Molecule Importer</h1>
+ * This class interprets files to
+ * import them into a molecule
  * 
  * @author Spencer Buchanan
  * @version 0.1
@@ -26,14 +28,14 @@ public class MoleculeImporter
 	 * Imports a .CML file into the specified Molecule at the specified filePath
 	 * 
 	 * @param molecule
-	 * @param filePath
+	 * @param fileToImport
 	 */
-	public static void importCmlFile(Molecule molecule, String filePath)
+	public static void importCmlFile(MoleculeModel molecule, File fileToImport)
 	{
 		try
 		{
 			XMLInputFactory factory = XMLInputFactory.newInstance();
-			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader(filePath));
+			XMLEventReader eventReader = factory.createXMLEventReader(new FileReader(fileToImport));
 
 			while(eventReader.hasNext())
 			{
