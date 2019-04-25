@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Spencer Buchanan\Desktop\Github\MoleculeFormatter\Eclipse Work Area\.metadata\.plugins\org.eclipse.jdt.core
-3316447483.index
-3233846397.index
-2756838348.index
